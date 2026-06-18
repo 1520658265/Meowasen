@@ -117,16 +117,19 @@ def main(argv: list[str] | None = None) -> int:
     response_summaries: list[dict[str, Any]] = []
     with httpx.Client(timeout=timeout, trust_env=_resolve_trust_env(args.trust_env)) as client:
         for index in range(args.count):
-            response = client.post(
-                url,
+            status_code, raw_body = _post_json_stream(
+                client=client,
+                url=url,
                 headers=headers,
-                json=payload,
+                payload=payload,
+                output_dir=output_dir,
+                index=index,
             )
-            if response.status_code != 200:
+            if status_code != 200:
                 error_path = output_dir / f"gemini_http_error_{index}.txt"
-                error_path.write_text(response.text, encoding="utf-8", errors="replace")
-                raise RuntimeError(f"Gemini HTTP {response.status_code}: {error_path}")
-            data = response.json()
+                error_path.write_bytes(raw_body)
+                raise RuntimeError(f"Gemini HTTP {status_code}: {error_path}")
+            data = _loads_json_response(raw_body, output_dir, index)
             (output_dir / f"gemini_response_raw_{index}.json").write_text(
                 json.dumps(data, ensure_ascii=False),
                 encoding="utf-8",
@@ -156,6 +159,67 @@ def main(argv: list[str] | None = None) -> int:
         )
     )
     return 0
+
+
+def _post_json_stream(
+    *,
+    client: httpx.Client,
+    url: str,
+    headers: dict[str, str],
+    payload: dict[str, Any],
+    output_dir: Path,
+    index: int,
+) -> tuple[int, bytes]:
+    chunks: list[bytes] = []
+    status_code = 0
+    response_headers: dict[str, str] = {}
+    try:
+        with client.stream("POST", url, headers=headers, json=payload) as response:
+            status_code = response.status_code
+            response_headers = dict(response.headers)
+            for chunk in response.iter_bytes():
+                if chunk:
+                    chunks.append(chunk)
+    except httpx.RemoteProtocolError as exc:
+        raw_body = b"".join(chunks)
+        partial_path = output_dir / f"gemini_stream_partial_{index}.bin"
+        partial_path.write_bytes(raw_body)
+        _write_json(
+            output_dir / f"gemini_stream_error_{index}.json",
+            {
+                "status_code": status_code,
+                "headers": response_headers,
+                "error": repr(exc),
+                "partial_bytes": len(raw_body),
+                "partial_path": str(partial_path),
+            },
+        )
+        if raw_body and _looks_like_complete_json(raw_body):
+            return status_code, raw_body
+        raise RuntimeError(
+            f"Gemini stream ended before a complete JSON body was received: {partial_path}"
+        ) from exc
+    return status_code, b"".join(chunks)
+
+
+def _loads_json_response(raw_body: bytes, output_dir: Path, index: int) -> dict[str, Any]:
+    try:
+        data = json.loads(raw_body.decode("utf-8-sig"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        bad_path = output_dir / f"gemini_json_parse_error_{index}.txt"
+        bad_path.write_bytes(raw_body[:20000])
+        raise RuntimeError(f"Gemini response was not valid JSON: {bad_path}") from exc
+    if not isinstance(data, dict):
+        raise RuntimeError(f"Gemini response JSON was not an object: {type(data).__name__}")
+    return data
+
+
+def _looks_like_complete_json(raw_body: bytes) -> bool:
+    try:
+        json.loads(raw_body.decode("utf-8-sig"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        return False
+    return True
 
 
 def _build_project_prompt(args: argparse.Namespace, config: Any) -> str:
