@@ -1,0 +1,18 @@
+grid: [4, 1]
+description: >
+  4-frame walking sprite sheet arranged in a strict 4x1 vertical strip.
+  The character is facing down/front in every frame. Keep the same character,
+  outfit, armor, blue cape, sword, shield, silhouette, proportions, palette,
+  and pixel-art rendering across every frame. One complete full-body sprite
+  per cell, centered with equal padding, no overlap, no labels, no scenery
+  beyond the configured chroma-key background.
+frame_prompts:
+  - "row 1: contact pose, left foot forward, right arm forward"
+  - "row 2: passing pose, feet closer together, body slightly raised"
+  - "row 3: contact pose, right foot forward, left arm forward"
+  - "row 4: passing pose, feet closer together, body slightly lowered"
+negative_extra: >
+  inconsistent character identity, different armor, different cape,
+  different shield emblem, different weapon, mismatched scale,
+  side view, back view, diagonal view, isometric view, merged figures,
+  overlapping sprites, missing cell separation, text labels, frame numbers

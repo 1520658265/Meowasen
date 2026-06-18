@@ -1,0 +1,6 @@
+grid: [1, 1]
+description: >
+  single sprite, one subject only, centered in the image,
+  front-facing RPG sprite view
+frame_prompts: []
+negative_extra: "multiple views, sprite sheet grid, duplicated subject"

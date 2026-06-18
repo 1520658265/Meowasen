@@ -1,0 +1,25 @@
+grid: [6, 8]
+description: >
+  47-tile blob autotile terrain transition set arranged in a strict 6x8
+  logical grid. The tiles describe one overlay terrain placed on top of a base
+  terrain, suitable for RPG map editors and manual expansion. Do not draw
+  visible grid lines, labels, tile numbers, UI, or borders between cells. Keep
+  the same RPG palette, lighting, pixel scale, and material identity across all
+  cells.
+  Include center fill, edge, outer-corner, inner-corner, cap, narrow strip,
+  T-junction, cross-junction, island, and complex connection pieces. Every cell
+  must be readable at 64x64 with simplified shapes, low-noise texture, and
+  crisp symbolic detail. The final unused cell may be a neutral base/fill
+  variant.
+frame_prompts:
+  - "row 1: center fill, isolated island, horizontal strip, vertical strip, single caps and simple ends"
+  - "row 2: top, bottom, left, right edge transitions with clean readable boundaries"
+  - "row 3: four outer corner transitions and four inner corner transitions"
+  - "row 4: T-junction transitions for all directions plus cross junctions"
+  - "row 5: diagonal/concave mixed transition variants for complex blob shapes"
+  - "row 6: cleanup variants, narrow connectors, optional neutral fill in the last cell"
+negative_extra: >
+  visible grid lines, borders, labels, tile numbers, characters, props, roads,
+  buildings, scene composition, perspective, shadows, inconsistent material,
+  mismatched edge style, random unrelated texture cells, photorealistic material
+  texture, noisy raw texture sample, high-frequency speckle

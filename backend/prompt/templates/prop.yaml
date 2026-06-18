@@ -1,0 +1,11 @@
+prefix: >
+  RPG pixel art style, game prop, isolated object,
+  centered composition on the configured chroma-key background,
+  clear outline, bold readable shape,
+  limited color palette, RPG overworld readability,
+  no shadow, no scenery or background details,
+  64x64 pixel game asset
+negative: >
+  realistic, photorealistic, blurry, noisy,
+  background clutter, multiple objects, text, watermark,
+  complex scene, heavy shadow, 3d render, inventory icon gloss

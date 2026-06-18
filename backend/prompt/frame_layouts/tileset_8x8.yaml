@@ -1,0 +1,26 @@
+grid: [8, 8]
+description: >
+  64-tile seamless terrain tileset arranged in a strict 8x8 grid.
+  Each cell is one square top-down terrain tile for repeated RPG map painting.
+  All cells must belong to the same material family and work together as one
+  continuous surface. Every tile should be seamless on all four edges: the left
+  edge must connect naturally to the right edge, and the top edge must connect
+  naturally to the bottom edge. Keep RPG pixel readability consistent across
+  cells: broad color clusters, limited palette, low noise, and sparse symbolic
+  detail. Avoid unique landmarks, borders, isolated props, characters, labels,
+  cast shadows, perspective, and scene composition.
+frame_prompts:
+  - "row 1: clean base terrain variations"
+  - "row 2: subtle texture density variations"
+  - "row 3: slightly darker terrain variations"
+  - "row 4: slightly lighter terrain variations"
+  - "row 5: small organic pattern variations"
+  - "row 6: low-contrast detail variations"
+  - "row 7: sparse detail variations"
+  - "row 8: alternate natural texture variations"
+negative_extra: >
+  characters, props, buildings, roads, items, borders, frames, labels,
+  strong perspective, scene composition, large focal objects, isolated icons,
+  thick outlines around the tile, obvious seams, mismatched edges,
+  non-repeatable landmarks, directional lighting, drop shadows,
+  photorealistic material texture, raw texture scan, noisy gritty surface

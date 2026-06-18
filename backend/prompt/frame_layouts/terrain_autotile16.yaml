@@ -1,0 +1,24 @@
+grid: [4, 4]
+description: >
+  16-tile minimal autotile terrain atlas arranged in a strict 4x4 logical grid.
+  Treat the atlas as if all cells were cropped from one continuous top-down
+  terrain sample, not as separate icons or separate mini scenes. This tileset
+  must be usable by code to assemble arbitrary terrain shapes on a base map.
+  Each cell is a terrain state from the same continuous material family: same
+  rock texture, same lava texture, same edge thickness, same palette, same
+  lighting, same pixel scale. Neighboring states must have compatible edge
+  colors and texture scale so repeated tiles form one coherent terrain patch.
+  Do not draw visible grid lines, gutters, shadows, labels, tile numbers, UI, or
+  borders between cells. The overlay terrain should transition cleanly into a
+  neutral base terrain around its edges. Keep texture detail readable at 64x64.
+frame_prompts:
+  - "cell 1 full overlay center fill. cell 2 top boundary: base terrain along the top edge, overlay continues to left, right, and bottom. cell 3 bottom boundary: base terrain along the bottom edge, overlay continues to left, right, and top. cell 4 left boundary: base terrain along the left edge, overlay continues to top, bottom, and right"
+  - "cell 5 right boundary: base terrain along the right edge, overlay continues to top, bottom, and left. cell 6 outer top-left convex corner: base terrain on top and left, overlay in the bottom-right. cell 7 outer top-right convex corner: base terrain on top and right, overlay in the bottom-left. cell 8 outer bottom-left convex corner: base terrain on bottom and left, overlay in the top-right"
+  - "cell 9 outer bottom-right convex corner: base terrain on bottom and right, overlay in the top-left. cell 10 inner top-left concave cutout: a base-terrain notch in the top-left corner, overlay on the other sides. cell 11 inner top-right concave cutout: a base-terrain notch in the top-right corner, overlay on the other sides. cell 12 inner bottom-left concave cutout: a base-terrain notch in the bottom-left corner, overlay on the other sides"
+  - "cell 13 inner bottom-right concave cutout: a base-terrain notch in the bottom-right corner, overlay on the other sides. cell 14 isolated one-tile island: small overlay island centered with base around all sides. cell 15 horizontal strip: overlay band connects left and right with base above and below. cell 16 vertical strip: overlay band connects top and bottom with base left and right"
+negative_extra: >
+  visible grid lines, gutters, labels, tile numbers, characters, props, roads,
+  buildings, scene composition, perspective, cast shadows, black separators,
+  thick outlines around cells, independent icons, mismatched edge directions,
+  inconsistent material, mismatched texture scale, random unrelated texture
+  cells, decorative frames

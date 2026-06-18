@@ -1,0 +1,6 @@
+Pillow>=12.0
+PyYAML>=6.0
+httpx>=0.28
+
+# Optional: improves background removal quality when installed.
+# rembg>=2.0

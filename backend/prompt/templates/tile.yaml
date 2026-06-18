@@ -1,0 +1,11 @@
+prefix: >
+  RPG pixel art map tile, top-down orthographic ground art,
+  cute colorful game tileset style, clean readable shapes,
+  low-noise symbolic texture, limited cohesive palette,
+  crisp hand-placed pixel details, no realism, no perspective,
+  no characters, 64x64 runtime RPG tile asset
+negative: >
+  realistic, photorealistic, blurry, noisy, high-frequency material texture,
+  generic texture sample, raw material scan, gritty realism,
+  characters, props, text, watermark, perspective view,
+  complex scene, 3d render, isometric perspective

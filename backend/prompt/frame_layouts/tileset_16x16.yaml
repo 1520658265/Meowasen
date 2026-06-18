@@ -1,0 +1,20 @@
+grid: [16, 16]
+description: >
+  256-tile seamless RPG terrain sheet arranged in a strict 16x16 grid.
+  Each cell is one 64x64 source tile for repeated top-down RPG map painting.
+  Treat the sheet as one continuous RPG ground surface broken into grid cells,
+  not as separate icons. Every tile should be seamless on all four edges and
+  visually compatible with neighboring tiles. Keep the tile art clean,
+  low-noise, readable, and repeatable. Use broad color clusters and sparse
+  symbolic variation only.
+  Avoid unique landmarks, borders, objects, characters, labels, cast shadows,
+  perspective, scene composition, and any tile that reads as a standalone icon.
+frame_prompts:
+  - "all rows: continuous simple RPG terrain tile variants"
+negative_extra: >
+  characters, props, buildings, roads, items, borders, frames, labels,
+  strong perspective, scene composition, large focal objects, isolated icons,
+  thick outlines around the tile, obvious seams, mismatched edges,
+  non-repeatable landmarks, directional lighting, drop shadows,
+  highly detailed separate illustrations, photorealistic material texture,
+  raw texture scan, noisy gritty surface

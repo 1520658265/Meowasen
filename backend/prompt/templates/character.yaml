@@ -1,0 +1,17 @@
+prefix: >
+  RPG pixel art style, game sprite, single character,
+  centered composition on the configured chroma-key background,
+  clear readable silhouette, strong pose,
+  limited color palette, no scenery or background details,
+  RPG overworld readability, top-down orthographic game view,
+  native low-resolution RPG sprite design, readable at 128x128 and 64x64,
+  chunky pixel clusters, large simple color blocks, crisp hard pixel edges,
+  bold 1-2 pixel dark outline, simplified ornament shapes, avoid tiny
+  high-frequency costume details, avoid soft painterly shading,
+  64x64 pixel game asset
+negative: >
+  realistic, photorealistic, blurry, noisy,
+  background clutter, multiple characters, text, watermark,
+  3d render, anime portrait, realistic proportions,
+  high-resolution illustration, soft brushwork, airbrushed gradients,
+  tiny jewelry details, dense micro details

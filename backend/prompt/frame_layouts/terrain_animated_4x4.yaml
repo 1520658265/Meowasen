@@ -1,0 +1,17 @@
+grid: [4, 4]
+description: >
+  4 animated terrain tiles arranged as 4 rows by 4 columns. Each row is one
+  looping animation and each column is one frame in time order. The animation
+  should loop smoothly from frame 4 back to frame 1. Do not draw visible grid
+  lines, labels, frame numbers, borders, objects, characters, or perspective.
+  Keep the same tile boundaries and material identity across frames so the tile
+  can be repeated on a map without jitter.
+frame_prompts:
+  - "row 1: primary looping terrain animation, frames 1-4"
+  - "row 2: subtle alternate looping animation, frames 1-4"
+  - "row 3: slower detail animation, frames 1-4"
+  - "row 4: sparse overlay animation, frames 1-4"
+negative_extra: >
+  visible grid lines, borders, labels, frame numbers, jitter, changing tile
+  shape, drifting texture, characters, props, perspective, shadows,
+  non-looping motion, large waves crossing cell borders

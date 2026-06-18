@@ -1,0 +1,1282 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meowasen Animation Preview</title>
+  <style>
+    :root {
+      --bg: #f4f4ef;
+      --surface: #ffffff;
+      --surface-2: #ecefe8;
+      --text: #202321;
+      --muted: #626962;
+      --line: #cfd6ce;
+      --accent: #1f7a5c;
+      --accent-2: #b4472a;
+      --shadow: 0 12px 32px rgba(29, 36, 31, 0.10);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+      color: var(--text);
+      padding: 8px 11px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      border-color: #aeb8ae;
+      background: #f8faf6;
+    }
+
+    button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    button.primary:hover {
+      background: #17694e;
+    }
+
+    button.icon {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      display: inline-grid;
+      place-items: center;
+      font-size: 15px;
+    }
+
+    input,
+    select {
+      height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+      color: var(--text);
+      padding: 0 10px;
+      min-width: 0;
+    }
+
+    input[type="range"] {
+      padding: 0;
+      height: 26px;
+    }
+
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      padding: 0;
+      accent-color: var(--accent);
+    }
+
+    input[type="file"] {
+      max-width: 280px;
+      padding: 6px;
+      height: 36px;
+      color: var(--muted);
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .topbar {
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .topbar-inner {
+      width: min(1500px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 12px 0;
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 7px;
+      background:
+        linear-gradient(135deg, rgba(31, 122, 92, 0.18), transparent 45%),
+        linear-gradient(315deg, rgba(180, 71, 42, 0.18), transparent 48%),
+        #fff;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .brand-title {
+      min-width: 0;
+    }
+
+    .brand-title strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .brand-title span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 62vw;
+    }
+
+    .loaders,
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .task-input {
+      width: min(390px, 38vw);
+    }
+
+    .main {
+      width: min(1500px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 16px 0 26px;
+      display: grid;
+      grid-template-columns: 310px minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar {
+      align-self: start;
+      position: sticky;
+      top: 78px;
+      overflow: hidden;
+    }
+
+    .section {
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section:last-child {
+      border-bottom: 0;
+    }
+
+    .section h2 {
+      margin: 0 0 10px;
+      font-size: 13px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .field:first-child {
+      margin-top: 0;
+    }
+
+    .field label,
+    .check label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .field-value {
+      font-size: 13px;
+      color: var(--text);
+      overflow-wrap: anywhere;
+    }
+
+    .inline {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .meta-grid {
+      display: grid;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .meta-row span:first-child {
+      color: var(--muted);
+    }
+
+    .stage {
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .preview-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .preview-title {
+      min-width: 0;
+    }
+
+    .preview-title h1 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.15;
+    }
+
+    .preview-title p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .playbar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .frame-counter {
+      min-width: 54px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface-2);
+      font-variant-numeric: tabular-nums;
+      font-size: 13px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      padding: 0 14px 14px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .card-head {
+      height: 42px;
+      padding: 0 11px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      background: #f8faf6;
+      gap: 10px;
+    }
+
+    .card-head strong {
+      font-size: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .badges {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 5px;
+      min-width: 0;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 20px;
+      border-radius: 999px;
+      padding: 2px 7px;
+      background: #e9eee7;
+      color: var(--muted);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .badge.warn {
+      background: #f7e7df;
+      color: var(--accent-2);
+    }
+
+    .viewer {
+      position: relative;
+      min-height: 250px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background-color: #dfe4dc;
+    }
+
+    .viewer.checker {
+      background-image:
+        linear-gradient(45deg, rgba(0, 0, 0, 0.11) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(0, 0, 0, 0.11) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.11) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.11) 75%);
+      background-size: 18px 18px;
+      background-position: 0 0, 0 9px, 9px -9px, -9px 0;
+    }
+
+    .viewer.dark {
+      background-color: #242a27;
+    }
+
+    .viewer.dark.checker {
+      background-image:
+        linear-gradient(45deg, rgba(255, 255, 255, 0.08) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.08) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.08) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.08) 75%);
+    }
+
+    .sprite {
+      width: calc(var(--frame-size, 128px) * var(--scale, 3));
+      height: calc(var(--frame-size, 128px) * var(--scale, 3));
+      max-width: 92%;
+      max-height: 92%;
+      object-fit: contain;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      z-index: 2;
+    }
+
+    .guide-cross::before,
+    .guide-cross::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      background: rgba(31, 122, 92, 0.35);
+      z-index: 1;
+    }
+
+    .guide-cross::before {
+      width: 1px;
+      top: 10%;
+      bottom: 10%;
+      left: 50%;
+    }
+
+    .guide-cross::after {
+      height: 1px;
+      left: 10%;
+      right: 10%;
+      top: 50%;
+    }
+
+    .strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(58px, 1fr));
+      gap: 7px;
+      padding: 9px;
+      border-top: 1px solid var(--line);
+      background: #fafbf8;
+    }
+
+    .thumb {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background:
+        linear-gradient(45deg, rgba(0, 0, 0, 0.08) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(0, 0, 0, 0.08) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.08) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.08) 75%),
+        #eef1eb;
+      background-size: 12px 12px;
+      background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+      min-height: 58px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .thumb.active {
+      border-color: var(--accent);
+      box-shadow: inset 0 0 0 2px rgba(31, 122, 92, 0.25);
+    }
+
+    .thumb img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    .thumb span {
+      position: absolute;
+      right: 4px;
+      bottom: 3px;
+      padding: 1px 4px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.82);
+      color: #3f4740;
+      font-size: 10px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sheet-wrap {
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .sheet-box {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background:
+        linear-gradient(45deg, rgba(0, 0, 0, 0.08) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(0, 0, 0, 0.08) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.08) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.08) 75%),
+        #eef1eb;
+      background-size: 18px 18px;
+      background-position: 0 0, 0 9px, 9px -9px, -9px 0;
+    }
+
+    .sheet-box img {
+      display: block;
+      width: 100%;
+      height: auto;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    .frame-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .frame-table th,
+    .frame-table td {
+      text-align: left;
+      padding: 8px 8px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .frame-table th {
+      color: var(--muted);
+      font-weight: 600;
+      background: #f8faf6;
+      position: sticky;
+      top: 0;
+    }
+
+    .empty {
+      min-height: 420px;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 1040px) {
+      .topbar-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .loaders,
+      .controls {
+        justify-content: flex-start;
+      }
+
+      .task-input {
+        width: min(100%, 520px);
+      }
+
+      .main {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .topbar-inner,
+      .main {
+        width: min(100vw - 18px, 1500px);
+      }
+
+      .preview-head,
+      .sheet-wrap {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .playbar {
+        justify-content: flex-start;
+      }
+
+      input[type="file"],
+      .task-input {
+        width: 100%;
+        max-width: none;
+      }
+
+      .loaders,
+      .controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+      }
+
+      .loaders input[type="file"],
+      .loaders .task-input,
+      .loaders button {
+        grid-column: span 2;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-mark">M</div>
+          <div class="brand-title">
+            <strong>Animation Preview</strong>
+            <span id="subtitle">未加载任务</span>
+          </div>
+        </div>
+        <div class="loaders">
+          <input id="directoryInput" type="file" webkitdirectory multiple title="选择任务目录">
+          <input id="taskInput" class="task-input" type="text" placeholder="task_id 或 assets/<task_id>">
+          <button id="loadHttpBtn" class="primary" type="button">加载</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <aside class="panel sidebar">
+        <div class="section">
+          <h2>播放</h2>
+          <div class="field">
+            <label for="candidateSelect">Candidate</label>
+            <select id="candidateSelect"></select>
+          </div>
+          <div class="field">
+            <label for="sourceSelect">帧源</label>
+            <select id="sourceSelect">
+              <option value="processed">processed</option>
+              <option value="aligned">aligned</option>
+              <option value="raw">raw</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="groupSelect">分组</label>
+            <select id="groupSelect">
+              <option value="row">按行</option>
+              <option value="column">按列</option>
+              <option value="all">全部</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="loopSelect">循环</label>
+            <select id="loopSelect">
+              <option value="forward">正序</option>
+              <option value="pingpong">往返</option>
+            </select>
+          </div>
+          <div class="field">
+            <div class="inline">
+              <label for="fpsRange">FPS</label>
+              <span id="fpsValue" class="field-value">8</span>
+            </div>
+            <input id="fpsRange" type="range" min="1" max="24" value="8">
+          </div>
+          <div class="field">
+            <div class="inline">
+              <label for="scaleRange">缩放</label>
+              <span id="scaleValue" class="field-value">3x</span>
+            </div>
+            <input id="scaleRange" type="range" min="1" max="6" value="3">
+          </div>
+          <div class="check">
+            <input id="checkerToggle" type="checkbox" checked>
+            <label for="checkerToggle">棋盘背景</label>
+          </div>
+          <div class="check">
+            <input id="darkToggle" type="checkbox">
+            <label for="darkToggle">深色背景</label>
+          </div>
+          <div class="check">
+            <input id="guideToggle" type="checkbox" checked>
+            <label for="guideToggle">中心线</label>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>任务</h2>
+          <div id="metaGrid" class="meta-grid">
+            <div class="meta-row"><span>状态</span><span>未加载</span></div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="stage">
+        <div class="panel">
+          <div class="preview-head">
+            <div class="preview-title">
+              <h1 id="title">动画帧预览</h1>
+              <p id="promptLine"></p>
+            </div>
+            <div class="playbar">
+              <button id="prevBtn" class="icon" type="button" title="上一帧">◀</button>
+              <button id="playBtn" class="primary" type="button">暂停</button>
+              <button id="nextBtn" class="icon" type="button" title="下一帧">▶</button>
+              <div id="frameCounter" class="frame-counter">0/0</div>
+            </div>
+          </div>
+          <div id="previewGrid" class="grid">
+            <div class="empty">选择任务目录或输入 task_id</div>
+          </div>
+        </div>
+
+        <div id="sheetPanel" class="panel hidden">
+          <div class="sheet-wrap">
+            <div class="sheet-box">
+              <img id="sheetImage" alt="sheet">
+            </div>
+            <div>
+              <table class="frame-table">
+                <thead>
+                  <tr>
+                    <th>Frame</th>
+                    <th>Grid</th>
+                    <th>Status</th>
+                    <th>Flags</th>
+                  </tr>
+                </thead>
+                <tbody id="frameTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const state = {
+      manifest: null,
+      sourceMode: "processed",
+      groupMode: "row",
+      loopMode: "forward",
+      candidateIndex: 0,
+      frameIndex: 0,
+      playing: true,
+      fps: 8,
+      scale: 3,
+      urls: new Map(),
+      localFiles: new Map(),
+      httpBase: "",
+      lastTick: 0,
+      groups: [],
+      longestGroup: 0
+    };
+
+    const els = {
+      directoryInput: document.getElementById("directoryInput"),
+      taskInput: document.getElementById("taskInput"),
+      loadHttpBtn: document.getElementById("loadHttpBtn"),
+      subtitle: document.getElementById("subtitle"),
+      candidateSelect: document.getElementById("candidateSelect"),
+      sourceSelect: document.getElementById("sourceSelect"),
+      groupSelect: document.getElementById("groupSelect"),
+      loopSelect: document.getElementById("loopSelect"),
+      fpsRange: document.getElementById("fpsRange"),
+      fpsValue: document.getElementById("fpsValue"),
+      scaleRange: document.getElementById("scaleRange"),
+      scaleValue: document.getElementById("scaleValue"),
+      checkerToggle: document.getElementById("checkerToggle"),
+      darkToggle: document.getElementById("darkToggle"),
+      guideToggle: document.getElementById("guideToggle"),
+      metaGrid: document.getElementById("metaGrid"),
+      title: document.getElementById("title"),
+      promptLine: document.getElementById("promptLine"),
+      previewGrid: document.getElementById("previewGrid"),
+      playBtn: document.getElementById("playBtn"),
+      prevBtn: document.getElementById("prevBtn"),
+      nextBtn: document.getElementById("nextBtn"),
+      frameCounter: document.getElementById("frameCounter"),
+      sheetPanel: document.getElementById("sheetPanel"),
+      sheetImage: document.getElementById("sheetImage"),
+      frameTableBody: document.getElementById("frameTableBody")
+    };
+
+    const directionNames = {
+      walk_4dir: ["向下", "向左", "向右", "向上"],
+      walk_3dir_3x4: ["向下", "向上", "向左"],
+      walk_cycle: ["Walk"],
+      idle: ["Idle"],
+      single: ["Single"],
+      sprite_pack: ["Row 1", "Row 2"],
+      tileset_4x4: ["Row 1", "Row 2", "Row 3", "Row 4"]
+    };
+
+    function basename(path) {
+      return String(path || "").replace(/\\/g, "/").split("/").pop();
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      })[char]);
+    }
+
+    function setStatus(message) {
+      els.subtitle.textContent = message;
+    }
+
+    function selectedCandidate() {
+      if (!state.manifest) {
+        return null;
+      }
+      return (state.manifest.candidates || []).find(
+        (candidate) => Number(candidate.index) === Number(state.candidateIndex)
+      ) || (state.manifest.candidates || [])[0] || null;
+    }
+
+    function frameFile(frame) {
+      if (state.sourceMode === "raw") {
+        return frame.raw;
+      }
+      if (state.sourceMode === "aligned") {
+        return frame.aligned || frame.processed;
+      }
+      return frame.processed;
+    }
+
+    function encodePath(path) {
+      return String(path || "")
+        .replace(/\\/g, "/")
+        .split("/")
+        .filter(Boolean)
+        .map(encodeURIComponent)
+        .join("/");
+    }
+
+    function joinUrl(base, fileName) {
+      const cleanBase = String(base || "").replace(/\/+$/, "");
+      return `${cleanBase}/${encodePath(fileName)}`;
+    }
+
+    function fileUrl(fileName) {
+      if (!fileName) {
+        return "";
+      }
+      if (state.localFiles.size) {
+        const file = state.localFiles.get(basename(fileName).toLowerCase());
+        if (!file) {
+          return "";
+        }
+        if (!state.urls.has(file.name)) {
+          state.urls.set(file.name, URL.createObjectURL(file));
+        }
+        return state.urls.get(file.name);
+      }
+      return joinUrl(state.httpBase, fileName);
+    }
+
+    function clearLocalUrls() {
+      for (const url of state.urls.values()) {
+        URL.revokeObjectURL(url);
+      }
+      state.urls.clear();
+    }
+
+    async function loadDirectory(files) {
+      clearLocalUrls();
+      state.localFiles.clear();
+      state.httpBase = "";
+
+      for (const file of files) {
+        const name = basename(file.webkitRelativePath || file.name).toLowerCase();
+        state.localFiles.set(name, file);
+      }
+
+      const meta = state.localFiles.get("meta.json");
+      if (!meta) {
+        throw new Error("未找到 meta.json");
+      }
+
+      const manifest = JSON.parse(await meta.text());
+      loadManifest(manifest, "local");
+    }
+
+    function resolveHttpBase(input) {
+      const value = String(input || "").trim();
+      if (!value) {
+        return "";
+      }
+      if (/^https?:\/\//i.test(value) || value.startsWith("/")) {
+        return value.replace(/\/meta\.json$/i, "").replace(/\/+$/, "");
+      }
+      if (value.includes("/") || value.includes("\\")) {
+        const normalized = value.replace(/\\/g, "/").replace(/\/meta\.json$/i, "");
+        if (normalized.startsWith("assets/")) {
+          return `/${normalized}`;
+        }
+        return normalized;
+      }
+      return `/assets/${value}`;
+    }
+
+    async function loadHttpTask(input) {
+      clearLocalUrls();
+      state.localFiles.clear();
+      const base = resolveHttpBase(input);
+      if (!base) {
+        throw new Error("缺少 task_id");
+      }
+      const response = await fetch(joinUrl(base, "meta.json"), { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error(`meta.json ${response.status}`);
+      }
+      state.httpBase = base;
+      const manifest = await response.json();
+      loadManifest(manifest, base);
+    }
+
+    function loadManifest(manifest, sourceLabel) {
+      state.manifest = manifest;
+      const candidates = manifest.candidates || [];
+      const existingCandidate = candidates.find(
+        (candidate) => Number(candidate.index) === Number(state.candidateIndex)
+      );
+      state.candidateIndex = Number((existingCandidate || candidates[0])?.index || 0);
+      state.frameIndex = 0;
+      state.playing = true;
+      els.playBtn.textContent = "暂停";
+      els.candidateSelect.innerHTML = candidates
+        .map((candidate) => `<option value="${candidate.index}">#${candidate.index} ${candidate.status || ""}</option>`)
+        .join("");
+      els.candidateSelect.value = String(state.candidateIndex);
+      setStatus(`${manifest.task_id || sourceLabel} · ${manifest.frame_layout || ""}`);
+      render();
+    }
+
+    function groupFrames(candidate) {
+      const frames = [...(candidate?.frames || [])]
+        .filter((frame) => frameFile(frame))
+        .sort((a, b) => Number(a.frame_index) - Number(b.frame_index));
+
+      if (state.groupMode === "all") {
+        return [{
+          key: "all",
+          label: "全部帧",
+          frames
+        }];
+      }
+
+      const index = state.groupMode === "column" ? 1 : 0;
+      const orderIndex = state.groupMode === "column" ? 0 : 1;
+      const groups = new Map();
+      for (const frame of frames) {
+        const grid = frame.grid_pos || [0, Number(frame.frame_index) || 0];
+        const key = Number(grid[index] || 0);
+        if (!groups.has(key)) {
+          groups.set(key, []);
+        }
+        groups.get(key).push(frame);
+      }
+
+      return [...groups.entries()]
+        .sort((a, b) => a[0] - b[0])
+        .map(([key, groupFrames]) => {
+          groupFrames.sort((a, b) => {
+            const gridA = a.grid_pos || [0, Number(a.frame_index) || 0];
+            const gridB = b.grid_pos || [0, Number(b.frame_index) || 0];
+            return Number(gridA[orderIndex] || 0) - Number(gridB[orderIndex] || 0);
+          });
+          return {
+            key,
+            label: groupLabel(key),
+            frames: groupFrames
+          };
+        });
+    }
+
+    function groupLabel(key) {
+      const layout = state.manifest?.frame_layout;
+      if (state.groupMode === "row") {
+        return (directionNames[layout] || [])[Number(key)] || `Row ${Number(key) + 1}`;
+      }
+      if (state.groupMode === "column") {
+        return `Column ${Number(key) + 1}`;
+      }
+      return "全部帧";
+    }
+
+    function loopPosition(groupLength) {
+      if (groupLength <= 0) {
+        return 0;
+      }
+      if (state.loopMode === "pingpong" && groupLength > 2) {
+        const period = groupLength * 2 - 2;
+        const pos = state.frameIndex % period;
+        return pos < groupLength ? pos : period - pos;
+      }
+      return state.frameIndex % groupLength;
+    }
+
+    function collectFlags(frames) {
+      const flags = new Set();
+      for (const frame of frames) {
+        for (const flag of frame.split_quality?.flags || []) {
+          flags.add(flag);
+        }
+      }
+      return [...flags];
+    }
+
+    function render() {
+      const manifest = state.manifest;
+      const candidate = selectedCandidate();
+      if (!manifest || !candidate) {
+        return;
+      }
+
+      const frameGrid = manifest.frame_grid || [1, 1];
+      els.title.textContent = `${manifest.asset_type || "asset"} / ${manifest.frame_layout || "layout"}`;
+      els.promptLine.textContent = manifest.user_prompt || "";
+      els.metaGrid.innerHTML = [
+        ["任务", manifest.task_id],
+        ["状态", manifest.status],
+        ["布局", `${manifest.frame_layout || ""} ${frameGrid[0]}x${frameGrid[1]}`],
+        ["候选", `#${candidate.index} ${candidate.status || ""}`],
+        ["模型", manifest.model],
+        ["输出", `${manifest.output_size || ""} px`],
+        ["色数", manifest.palette_colors],
+        ["sheet", candidate.sheet || ""]
+      ].map(([key, value]) => (
+        `<div class="meta-row"><span>${escapeHtml(key)}</span><span>${escapeHtml(value ?? "")}</span></div>`
+      )).join("");
+
+      state.groups = groupFrames(candidate);
+      state.longestGroup = Math.max(0, ...state.groups.map((group) => group.frames.length));
+      document.documentElement.style.setProperty("--scale", String(state.scale));
+      document.documentElement.style.setProperty("--frame-size", `${Number(manifest.output_size || 128)}px`);
+
+      if (!state.groups.length || !state.longestGroup) {
+        els.previewGrid.innerHTML = `<div class="empty">没有可预览帧</div>`;
+        els.frameCounter.textContent = "0/0";
+        return;
+      }
+
+      els.previewGrid.innerHTML = state.groups.map((group, groupIndex) => {
+        const activeIndex = loopPosition(group.frames.length);
+        const activeFrame = group.frames[activeIndex];
+        const flags = collectFlags(group.frames);
+        const badges = [
+          `<span class="badge">${group.frames.length} frames</span>`,
+          ...flags.map((flag) => `<span class="badge warn">${escapeHtml(flag)}</span>`)
+        ].join("");
+        const src = fileUrl(frameFile(activeFrame));
+        const thumbs = group.frames.map((frame, index) => {
+          const thumbSrc = fileUrl(frameFile(frame));
+          const active = index === activeIndex ? " active" : "";
+          const flagTitle = (frame.split_quality?.flags || []).join(", ");
+          return `
+            <button class="thumb${active}" type="button" data-frame-offset="${index}" title="${escapeHtml(flagTitle)}">
+              <img src="${thumbSrc}" alt="frame ${frame.frame_index}">
+              <span>${frame.frame_index}</span>
+            </button>
+          `;
+        }).join("");
+        return `
+          <article class="card" data-group-index="${groupIndex}">
+            <div class="card-head">
+              <strong>${escapeHtml(group.label)}</strong>
+              <div class="badges">${badges}</div>
+            </div>
+            <div class="viewer${els.checkerToggle.checked ? " checker" : ""}${els.darkToggle.checked ? " dark" : ""}${els.guideToggle.checked ? " guide-cross" : ""}">
+              <img class="sprite" src="${src}" alt="${escapeHtml(group.label)} frame">
+            </div>
+            <div class="strip">${thumbs}</div>
+          </article>
+        `;
+      }).join("");
+
+      els.previewGrid.querySelectorAll(".thumb").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.frameIndex = Number(button.dataset.frameOffset || 0);
+          renderCurrentFrame();
+        });
+      });
+
+      renderSheet(candidate);
+      renderCurrentFrame();
+    }
+
+    function renderSheet(candidate) {
+      const sheetSrc = fileUrl(candidate.sheet);
+      if (!sheetSrc) {
+        els.sheetPanel.classList.add("hidden");
+        return;
+      }
+      els.sheetPanel.classList.remove("hidden");
+      els.sheetImage.src = sheetSrc;
+      els.frameTableBody.innerHTML = (candidate.frames || []).map((frame) => {
+        const flags = (frame.split_quality?.flags || []).join(", ");
+        const grid = frame.grid_pos || [];
+        return `
+          <tr>
+            <td>${escapeHtml(frame.frame_index)}</td>
+            <td>${escapeHtml(grid.join(","))}</td>
+            <td>${escapeHtml(frame.status || "")}</td>
+            <td>${escapeHtml(flags)}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function renderCurrentFrame() {
+      if (!state.groups.length || !state.longestGroup) {
+        return;
+      }
+      els.previewGrid.querySelectorAll(".card").forEach((card) => {
+        const group = state.groups[Number(card.dataset.groupIndex || 0)];
+        if (!group || !group.frames.length) {
+          return;
+        }
+        const activeIndex = loopPosition(group.frames.length);
+        const frame = group.frames[activeIndex];
+        const image = card.querySelector(".sprite");
+        if (image) {
+          image.src = fileUrl(frameFile(frame));
+          image.alt = `${group.label} frame ${frame.frame_index}`;
+        }
+        card.querySelectorAll(".thumb").forEach((thumb, index) => {
+          thumb.classList.toggle("active", index === activeIndex);
+        });
+      });
+      const displayIndex = state.longestGroup ? (state.frameIndex % state.longestGroup) + 1 : 0;
+      els.frameCounter.textContent = `${displayIndex}/${state.longestGroup}`;
+    }
+
+    function tick(timestamp) {
+      if (!state.lastTick) {
+        state.lastTick = timestamp;
+      }
+      const interval = 1000 / Math.max(1, state.fps);
+      if (state.playing && timestamp - state.lastTick >= interval) {
+        state.lastTick = timestamp;
+        stepFrame(1);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function stepFrame(delta) {
+      if (!state.longestGroup) {
+        return;
+      }
+      const period = state.loopMode === "pingpong" && state.longestGroup > 2
+        ? state.longestGroup * 2 - 2
+        : state.longestGroup;
+      state.frameIndex = (state.frameIndex + delta + period) % period;
+      renderCurrentFrame();
+    }
+
+    els.directoryInput.addEventListener("change", async () => {
+      try {
+        await loadDirectory(els.directoryInput.files || []);
+      } catch (error) {
+        setStatus(error.message);
+      }
+    });
+
+    els.loadHttpBtn.addEventListener("click", async () => {
+      try {
+        await loadHttpTask(els.taskInput.value);
+      } catch (error) {
+        setStatus(error.message);
+      }
+    });
+
+    els.taskInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        els.loadHttpBtn.click();
+      }
+    });
+
+    els.candidateSelect.addEventListener("change", () => {
+      state.candidateIndex = Number(els.candidateSelect.value);
+      state.frameIndex = 0;
+      render();
+    });
+
+    els.sourceSelect.addEventListener("change", () => {
+      state.sourceMode = els.sourceSelect.value;
+      render();
+    });
+
+    els.groupSelect.addEventListener("change", () => {
+      state.groupMode = els.groupSelect.value;
+      state.frameIndex = 0;
+      render();
+    });
+
+    els.loopSelect.addEventListener("change", () => {
+      state.loopMode = els.loopSelect.value;
+      state.frameIndex = 0;
+      renderCurrentFrame();
+    });
+
+    els.fpsRange.addEventListener("input", () => {
+      state.fps = Number(els.fpsRange.value);
+      els.fpsValue.textContent = String(state.fps);
+    });
+
+    els.scaleRange.addEventListener("input", () => {
+      state.scale = Number(els.scaleRange.value);
+      els.scaleValue.textContent = `${state.scale}x`;
+      document.documentElement.style.setProperty("--scale", String(state.scale));
+    });
+
+    els.checkerToggle.addEventListener("change", render);
+    els.darkToggle.addEventListener("change", render);
+    els.guideToggle.addEventListener("change", render);
+
+    els.playBtn.addEventListener("click", () => {
+      state.playing = !state.playing;
+      els.playBtn.textContent = state.playing ? "暂停" : "播放";
+    });
+
+    els.prevBtn.addEventListener("click", () => {
+      state.playing = false;
+      els.playBtn.textContent = "播放";
+      stepFrame(-1);
+    });
+
+    els.nextBtn.addEventListener("click", () => {
+      state.playing = false;
+      els.playBtn.textContent = "播放";
+      stepFrame(1);
+    });
+
+    async function bootFromQuery() {
+      const params = new URLSearchParams(window.location.search);
+      const task = params.get("task") || params.get("task_id");
+      const candidate = params.get("candidate");
+      if (candidate !== null) {
+        state.candidateIndex = Number(candidate);
+      }
+      if (task) {
+        els.taskInput.value = task;
+        try {
+          await loadHttpTask(task);
+        } catch (error) {
+          setStatus(error.message);
+        }
+      }
+    }
+
+    requestAnimationFrame(tick);
+    bootFromQuery();
+  </script>
+</body>
+</html>

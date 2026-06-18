@@ -1,0 +1,19 @@
+grid: [2, 2]
+description: >
+  2 by 2 character candidate sheet, four alternative versions of the same
+  single RPG overworld character. Each cell contains exactly one full-body
+  character on the configured chroma-key background, centered with safe margins.
+  Keep the same role, equipment, pose family, pixel scale, palette family, and
+  front-facing RPG sprite view across all four candidates. The four cells are
+  alternatives for manual selection, not an animation and not different
+  directions.
+frame_prompts:
+  - "top left: candidate A, same character description"
+  - "top right: candidate B, same character description"
+  - "bottom left: candidate C, same character description"
+  - "bottom right: candidate D, same character description"
+negative_extra: >
+  different characters, different species, different equipment, animation
+  sequence, walk cycle, turn-around views, side view, back view, merged cells,
+  overlapping sprites, missing character, cropped body, cropped weapon, labels,
+  text, visible grid lines, borders between cells

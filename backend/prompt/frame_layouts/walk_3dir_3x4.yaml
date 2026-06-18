@@ -1,0 +1,21 @@
+grid: [3, 4]
+description: >
+  12-frame walking sprite sheet arranged in a strict 3x4 grid.
+  Each row is one direction and each column is one walk-cycle frame.
+  Row 1: facing down/front. Row 2: facing up/back. Row 3: facing left.
+  Do not generate the right-facing direction; it will be mirrored from the
+  left-facing row after generation. Keep the same character, outfit, armor,
+  blue cape, weapon, shield, silhouette, proportions, palette, and pixel-art
+  rendering across every frame. One complete full-body sprite per cell,
+  centered with equal padding, no overlap, no merged bodies, no labels,
+  no scenery beyond the configured chroma-key background.
+frame_prompts:
+  - "column 1: contact pose, left foot forward, opposite arm forward"
+  - "column 2: passing pose, feet closer together, body slightly raised"
+  - "column 3: contact pose, right foot forward, opposite arm forward"
+  - "column 4: passing pose, feet closer together, body slightly lowered"
+negative_extra: >
+  right-facing row, inconsistent character identity, different armor,
+  different cape, different shield emblem, different weapon, mismatched scale,
+  diagonal view, isometric view, merged figures, overlapping sprites,
+  missing cell separation, text labels, frame numbers

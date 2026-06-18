@@ -1,0 +1,17 @@
+grid: [4, 4]
+description: >
+  16 base terrain tiles arranged in a strict 4x4 logical grid.
+  All cells are the same RPG terrain family and must be seamless, repeatable,
+  and usable as fill tiles for top-down RPG maps. Do not draw visible grid
+  lines, borders, labels, objects, paths, or scene composition. Each tile should
+  be a complete square RPG ground tile with consistent lighting, pixel scale,
+  low-noise color clusters, and sparse symbolic details.
+frame_prompts:
+  - "row 1: clean base variations"
+  - "row 2: subtle detail variations"
+  - "row 3: slightly denser texture variations"
+  - "row 4: sparse alternate variations"
+negative_extra: >
+  visible grid lines, borders, labels, characters, props, roads, large focal
+  objects, perspective, shadows, non-repeatable landmarks, mismatched edges,
+  photorealistic material texture, raw texture scan, noisy gritty surface

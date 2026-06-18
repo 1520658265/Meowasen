@@ -1,0 +1,1 @@
+"""Meowasen core package."""

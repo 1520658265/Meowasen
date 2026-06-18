@@ -1,0 +1,82 @@
+relay:
+  base_url: "https://bobdong.cn/v1"
+  api_key_env: "GEMINI_API_KEY"
+
+generator:
+  backend: openai_image
+  model: "gpt-image-2"
+  provider_options: {}
+
+generation:
+  default_count: 2
+  default_counts_by_layout:
+    single: 2
+    idle: 1
+    walk_cycle: 1
+    walk_4dir: 1
+    walk_3dir_3x4: 1
+    walk_down_2x2: 1
+    walk_4x1: 1
+    turnaround: 1
+    sprite_pack: 2
+    character_candidates_2x2: 1
+    terrain_base_4x4: 1
+    terrain_autotile16: 1
+    terrain_source_8x8: 1
+    terrain_blob47: 1
+    terrain_animated_4x4: 1
+  default_frame_layout: single
+  timeout_seconds: 600
+  daily_limit: 100
+
+output:
+  default_size: 128
+  default_sizes_by_asset_type:
+    character: 128
+    prop: 64
+    icon: 64
+    tile: 64
+  default_cell_size: 256
+  default_cell_sizes_by_layout:
+    tileset_8x8: 128
+    tileset_16x16: 64
+    tileset_16x16_4materials: 64
+    character_candidates_2x2: 512
+    terrain_base_4x4: 256
+    terrain_autotile16: 256
+    terrain_source_8x8: 128
+    terrain_blob47: 128
+    terrain_animated_4x4: 128
+    walk_4dir: 256
+    walk_3dir_3x4: 256
+    walk_down_2x2: 256
+    walk_4x1: 256
+  palette_colors: 16
+  canvas_padding: 4
+  enforce_style_lock: true
+
+frame_layouts:
+  single: [1, 1]
+  idle: [1, 2]
+  walk_cycle: [1, 4]
+  walk_4x1: [4, 1]
+  walk_down_2x2: [2, 2]
+  walk_3dir_3x4: [3, 4]
+  walk_4dir: [4, 4]
+  turnaround: [3, 3]
+  tileset_4x4: [4, 4]
+  tileset_8x8: [8, 8]
+  tileset_16x16: [16, 16]
+  tileset_16x16_4materials: [16, 16]
+  terrain_base_4x4: [4, 4]
+  terrain_autotile16: [4, 4]
+  terrain_source_8x8: [8, 8]
+  terrain_blob47: [6, 8]
+  terrain_animated_4x4: [4, 4]
+  sprite_pack: [2, 2]
+  character_candidates_2x2: [2, 2]
+
+paths:
+  templates_dir: "backend/prompt/templates"
+  frame_layouts_dir: "backend/prompt/frame_layouts"
+  assets_dir: "test_runs/character_animation_001/assets"

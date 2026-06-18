@@ -1,0 +1,24 @@
+grid: [16, 16]
+description: >
+  256-tile multi-material terrain sheet arranged in a strict 16x16 grid.
+  Each cell is one 64x64 source tile for repeated top-down RPG map painting.
+  The sheet is divided into four horizontal material groups. Rows 1-4 are
+  grass tiles. Rows 5-8 are dirt tiles. Rows 9-12 are stone tiles. Rows 13-16
+  are water tiles. Each 4-row group must be internally seamless and visually
+  consistent, with all tiles in that group working as one continuous surface.
+  Do not blend materials between groups. Keep RPG readability, lighting, and
+  pixel scale consistent across the whole sheet. Use clean color clusters,
+  small symbolic details, and low-noise tile art instead of raw material
+  texture.
+frame_prompts:
+  - "rows 1-4: grass terrain, soft mossy green organic texture, no flowers or objects"
+  - "rows 5-8: dirt terrain, warm brown packed earth texture, no rocks or objects"
+  - "rows 9-12: stone terrain, gray cobblestone or rough rock texture, no raised walls"
+  - "rows 13-16: water terrain, blue shallow water surface texture, no waves crossing cell borders"
+negative_extra: >
+  characters, props, buildings, roads, items, borders, frames, labels,
+  strong perspective, scene composition, large focal objects, isolated icons,
+  thick outlines around the tile, obvious seams, mismatched edges,
+  non-repeatable landmarks, directional lighting, drop shadows,
+  material bleeding between row groups, flowers, trees, fences,
+  photorealistic material texture, raw texture scan, noisy gritty surface

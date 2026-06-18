@@ -1,0 +1,10 @@
+grid: [1, 4]
+description: >
+  4-frame walk cycle sprite sheet, frames laid out horizontally,
+  evenly spaced, identical character in each cell, no overlap between cells
+frame_prompts:
+  - "frame 1: contact pose, left foot forward, right arm forward"
+  - "frame 2: passing pose, weight on right leg, body slight up"
+  - "frame 3: contact pose, right foot forward, left arm forward"
+  - "frame 4: passing pose, weight on left leg, body slight up"
+negative_extra: "merged figures, overlapping sprites, missing cell separation"

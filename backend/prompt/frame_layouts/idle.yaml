@@ -1,0 +1,8 @@
+grid: [1, 2]
+description: >
+  2-frame idle animation sprite sheet, frames laid out horizontally,
+  evenly spaced, identical character in each cell, no overlap between cells
+frame_prompts:
+  - "frame 1: neutral idle pose"
+  - "frame 2: slight breathing pose, body subtly lifted"
+negative_extra: "merged figures, overlapping sprites, missing cell separation"

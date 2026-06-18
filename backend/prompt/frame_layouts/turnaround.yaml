@@ -1,0 +1,15 @@
+grid: [3, 3]
+description: >
+  3 by 3 character turnaround sprite sheet, eight directions plus center,
+  evenly spaced, identical character design in each cell, no overlap
+frame_prompts:
+  - "top left: back-left view"
+  - "top center: back view"
+  - "top right: back-right view"
+  - "middle left: left side view"
+  - "middle center: front view"
+  - "middle right: right side view"
+  - "bottom left: front-left view"
+  - "bottom center: front view variant"
+  - "bottom right: front-right view"
+negative_extra: "merged figures, overlapping sprites, missing cell separation, different outfits"

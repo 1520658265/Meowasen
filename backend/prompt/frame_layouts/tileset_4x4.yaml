@@ -1,0 +1,16 @@
+grid: [4, 4]
+description: >
+  16-tile seamless terrain tileset arranged in a strict 4x4 grid.
+  All cells belong to the same top-down terrain family and should read as
+  closely related tile variants for one continuous surface. Avoid obvious
+  borders, isolated props, characters, perspective, and scene composition.
+  Keep the palette restrained and the surface readable for RPG map use.
+frame_prompts:
+  - "tile 1: clean center tile variant"
+  - "tile 2: subtle texture variation"
+  - "tile 3: subtle texture variation"
+  - "tile 4: subtle texture variation"
+negative_extra: >
+  characters, props, buildings, roads, items, borders, frames, labels,
+  strong perspective, scene composition, large focal objects, isolated icons,
+  thick outlines around the tile, obvious seams

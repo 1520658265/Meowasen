@@ -1,0 +1,7 @@
+ornate cat warrior carrying a long spear, same role as the approved static sprite:
+a heroic anthropomorphic cat warrior with ornate fantasy armor, compact RPG overworld proportions,
+one long spear held consistently, readable cat ears and tail, colorful but controlled costume,
+cute serious expression, no extra characters, body-only sprite frames, no attack effects, no motion trails.
+Keep the spear, armor silhouette, face markings, tail shape, color palette, and body scale consistent across all frames.
+Use clean RPG pixel-art animation poses with stable feet anchor and centered body in each cell.
+Generate only down/front, up/back, and left-facing walking rows; the right-facing row will be mirrored by code.

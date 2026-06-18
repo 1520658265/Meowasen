@@ -1,0 +1,18 @@
+grid: [2, 2]
+description: >
+  4-frame walking animation sprite sheet arranged in a strict 2x2 grid.
+  The character is facing down/front in every frame. Keep the same character,
+  outfit, armor, blue cape, sword, shield, silhouette, proportions, palette,
+  and pixel-art rendering across every frame. One complete full-body sprite
+  per cell, centered with equal padding, no overlap, no labels, no scenery
+  beyond the configured chroma-key background.
+frame_prompts:
+  - "frame 1 top-left: contact pose, left foot forward, right arm forward"
+  - "frame 2 top-right: passing pose, feet closer together, body slightly raised"
+  - "frame 3 bottom-left: contact pose, right foot forward, left arm forward"
+  - "frame 4 bottom-right: passing pose, feet closer together, body slightly lowered"
+negative_extra: >
+  inconsistent character identity, different armor, different cape,
+  different shield emblem, different weapon, mismatched scale,
+  side view, back view, diagonal view, isometric view, merged figures,
+  overlapping sprites, missing cell separation, text labels, frame numbers

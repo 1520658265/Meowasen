@@ -1,0 +1,9 @@
+prefix: >
+  pixel art style, game ui icon, square composition,
+  centered object on the configured chroma-key background,
+  bold silhouette, clear outline, limited color palette,
+  readable at small size, 64x64 pixel game asset
+negative: >
+  realistic, photorealistic, blurry, noisy,
+  background clutter, text, watermark, complex scene,
+  thin unreadable details

@@ -1,0 +1,10 @@
+grid: [2, 2]
+description: >
+  2 by 2 sprite pack sheet, four related game assets,
+  evenly spaced, same pixel art style and palette, no overlap between cells
+frame_prompts:
+  - "top left: first asset"
+  - "top right: second asset"
+  - "bottom left: third asset"
+  - "bottom right: fourth asset"
+negative_extra: "merged objects, overlapping sprites, missing cell separation, inconsistent style"
