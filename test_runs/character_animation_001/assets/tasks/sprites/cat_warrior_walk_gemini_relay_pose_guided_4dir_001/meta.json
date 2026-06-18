@@ -614,5 +614,141 @@
       -1,
       2
     ]
-  }
+  },
+  "walk_qc": [
+    {
+      "task_id": "cat_warrior_walk_gemini_relay_pose_guided_4dir_001",
+      "candidate_index": 0,
+      "source": "processed",
+      "frame_layout": "walk_4dir",
+      "frame_grid": [
+        4,
+        4
+      ],
+      "outputs": {
+        "all_directions_gif": "qc_auto_all_directions.gif",
+        "row_gifs": [
+          "qc_auto_down_front.gif",
+          "qc_auto_left.gif",
+          "qc_auto_right.gif",
+          "qc_auto_up_back.gif"
+        ]
+      },
+      "rows": [
+        {
+          "row": 0,
+          "label": "down_front",
+          "frame_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "gif": "qc_auto_down_front.gif",
+          "bbox_x_range": 0.5,
+          "alpha_x_range": 1.343,
+          "bottom_y_range": 0.0,
+          "visible_area_range_pct": 4.846,
+          "sequential_diff_pct": [
+            5.234,
+            4.908,
+            6.734,
+            5.746
+          ],
+          "loop_diff_pct": 5.746,
+          "motion_mean_pct": 5.655,
+          "motion_range_pct": 1.826,
+          "flags": [
+            "low_pose_motion"
+          ]
+        },
+        {
+          "row": 1,
+          "label": "left",
+          "frame_indices": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "gif": "qc_auto_left.gif",
+          "bbox_x_range": 1.0,
+          "alpha_x_range": 0.905,
+          "bottom_y_range": 0.0,
+          "visible_area_range_pct": 8.374,
+          "sequential_diff_pct": [
+            3.533,
+            7.673,
+            4.542,
+            6.421
+          ],
+          "loop_diff_pct": 6.421,
+          "motion_mean_pct": 5.542,
+          "motion_range_pct": 4.14,
+          "flags": [
+            "low_pose_motion",
+            "scale_or_detail_drift"
+          ]
+        },
+        {
+          "row": 2,
+          "label": "right",
+          "frame_indices": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "gif": "qc_auto_right.gif",
+          "bbox_x_range": 1.0,
+          "alpha_x_range": 0.905,
+          "bottom_y_range": 0.0,
+          "visible_area_range_pct": 8.374,
+          "sequential_diff_pct": [
+            3.533,
+            7.673,
+            4.542,
+            6.421
+          ],
+          "loop_diff_pct": 6.421,
+          "motion_mean_pct": 5.542,
+          "motion_range_pct": 4.14,
+          "flags": [
+            "low_pose_motion",
+            "scale_or_detail_drift"
+          ]
+        },
+        {
+          "row": 3,
+          "label": "up_back",
+          "frame_indices": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "gif": "qc_auto_up_back.gif",
+          "bbox_x_range": 0.5,
+          "alpha_x_range": 2.871,
+          "bottom_y_range": 0.0,
+          "visible_area_range_pct": 9.545,
+          "sequential_diff_pct": [
+            7.99,
+            4.726,
+            2.667,
+            8.316
+          ],
+          "loop_diff_pct": 8.316,
+          "motion_mean_pct": 5.925,
+          "motion_range_pct": 5.649,
+          "flags": [
+            "low_pose_motion",
+            "uneven_pose_motion",
+            "scale_or_detail_drift"
+          ]
+        }
+      ],
+      "created_at": "2026-06-18T10:13:29.322466+00:00"
+    }
+  ]
 }
