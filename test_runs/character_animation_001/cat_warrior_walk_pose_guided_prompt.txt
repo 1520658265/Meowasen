@@ -1,0 +1,8 @@
+Create a clean RPG pixel-art walk animation sheet for the approved ornate cat warrior.
+Use reference image 1 as the character identity, costume, palette, silhouette, weapon, shield, cat ears, tail, and RPG pixel style reference.
+Use reference image 2 as the strict pose and layout guide: each cell's skeleton controls the body direction, foot placement, body bob, tail direction, and locked spear guide.
+Render the final art as the cat warrior, not as a skeleton. Preserve the exact 4x4 grid and the pose guide's row/column logic.
+Rows: row 1 down/front walk cycle, row 2 left-facing walk cycle, row 3 up/back walk cycle, row 4 helper duplicate of left-facing walk cycle for later code mirroring.
+Columns: left foot contact, passing body up, right foot contact, passing body down and loop-ready.
+Keep the spear and shield locked to the torso across frames. Make side-view foot motion clearly visible so the character does not slide.
+Use a flat solid RGB(255,0,255) #FF00FF background in every cell for post-processing. No labels, no text, no borders, no scene, no extra effects.

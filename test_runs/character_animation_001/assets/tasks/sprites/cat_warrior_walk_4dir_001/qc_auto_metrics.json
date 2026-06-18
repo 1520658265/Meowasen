@@ -1,0 +1,124 @@
+{
+  "task_id": "cat_warrior_walk_4dir_001",
+  "candidate_index": 0,
+  "source": "processed",
+  "frame_layout": "walk_4dir",
+  "frame_grid": [
+    4,
+    4
+  ],
+  "outputs": {
+    "all_directions_gif": "qc_auto_all_directions.gif",
+    "row_gifs": [
+      "qc_auto_down_front.gif",
+      "qc_auto_left.gif",
+      "qc_auto_right.gif",
+      "qc_auto_up_back.gif"
+    ]
+  },
+  "rows": [
+    {
+      "row": 0,
+      "label": "down_front",
+      "frame_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "gif": "qc_auto_down_front.gif",
+      "bbox_x_range": 0.5,
+      "alpha_x_range": 1.696,
+      "bottom_y_range": 0.0,
+      "visible_area_range_pct": 5.932,
+      "sequential_diff_pct": [
+        9.686,
+        7.662,
+        9.021,
+        10.242
+      ],
+      "loop_diff_pct": 10.242,
+      "motion_mean_pct": 9.153,
+      "motion_range_pct": 2.579,
+      "flags": []
+    },
+    {
+      "row": 1,
+      "label": "left",
+      "frame_indices": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "gif": "qc_auto_left.gif",
+      "bbox_x_range": 0.0,
+      "alpha_x_range": 1.215,
+      "bottom_y_range": 0.0,
+      "visible_area_range_pct": 3.514,
+      "sequential_diff_pct": [
+        8.231,
+        5.326,
+        5.729,
+        6.484
+      ],
+      "loop_diff_pct": 6.484,
+      "motion_mean_pct": 6.443,
+      "motion_range_pct": 2.905,
+      "flags": []
+    },
+    {
+      "row": 2,
+      "label": "right",
+      "frame_indices": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "gif": "qc_auto_right.gif",
+      "bbox_x_range": 1.0,
+      "alpha_x_range": 1.688,
+      "bottom_y_range": 0.0,
+      "visible_area_range_pct": 1.235,
+      "sequential_diff_pct": [
+        5.37,
+        6.387,
+        5.17,
+        8.343
+      ],
+      "loop_diff_pct": 8.343,
+      "motion_mean_pct": 6.317,
+      "motion_range_pct": 3.174,
+      "flags": []
+    },
+    {
+      "row": 3,
+      "label": "up_back",
+      "frame_indices": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "gif": "qc_auto_up_back.gif",
+      "bbox_x_range": 0.5,
+      "alpha_x_range": 0.474,
+      "bottom_y_range": 0.0,
+      "visible_area_range_pct": 2.893,
+      "sequential_diff_pct": [
+        5.624,
+        4.574,
+        5.983,
+        7.024
+      ],
+      "loop_diff_pct": 7.024,
+      "motion_mean_pct": 5.801,
+      "motion_range_pct": 2.451,
+      "flags": [
+        "low_pose_motion"
+      ]
+    }
+  ],
+  "created_at": "2026-06-18T08:50:15.327972+00:00"
+}

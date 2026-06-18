@@ -1,0 +1,130 @@
+{
+  "task_id": "cat_warrior_walk_4dir_mirrored_001",
+  "candidate_index": 0,
+  "source": "processed",
+  "frame_layout": "walk_4dir",
+  "frame_grid": [
+    4,
+    4
+  ],
+  "outputs": {
+    "all_directions_gif": "qc_auto_all_directions.gif",
+    "row_gifs": [
+      "qc_auto_down_front.gif",
+      "qc_auto_left.gif",
+      "qc_auto_right.gif",
+      "qc_auto_up_back.gif"
+    ]
+  },
+  "rows": [
+    {
+      "row": 0,
+      "label": "down_front",
+      "frame_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "gif": "qc_auto_down_front.gif",
+      "bbox_x_range": 0.5,
+      "alpha_x_range": 6.239,
+      "bottom_y_range": 0.0,
+      "visible_area_range_pct": 4.688,
+      "sequential_diff_pct": [
+        14.349,
+        15.022,
+        14.862,
+        14.058
+      ],
+      "loop_diff_pct": 14.058,
+      "motion_mean_pct": 14.573,
+      "motion_range_pct": 0.964,
+      "flags": [
+        "center_drift"
+      ]
+    },
+    {
+      "row": 1,
+      "label": "left",
+      "frame_indices": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "gif": "qc_auto_left.gif",
+      "bbox_x_range": 0.5,
+      "alpha_x_range": 0.622,
+      "bottom_y_range": 0.0,
+      "visible_area_range_pct": 2.638,
+      "sequential_diff_pct": [
+        4.487,
+        3.627,
+        4.364,
+        4.42
+      ],
+      "loop_diff_pct": 4.42,
+      "motion_mean_pct": 4.224,
+      "motion_range_pct": 0.861,
+      "flags": [
+        "low_pose_motion"
+      ]
+    },
+    {
+      "row": 2,
+      "label": "right",
+      "frame_indices": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "gif": "qc_auto_right.gif",
+      "bbox_x_range": 0.5,
+      "alpha_x_range": 0.622,
+      "bottom_y_range": 0.0,
+      "visible_area_range_pct": 2.638,
+      "sequential_diff_pct": [
+        4.487,
+        3.627,
+        4.364,
+        4.42
+      ],
+      "loop_diff_pct": 4.42,
+      "motion_mean_pct": 4.224,
+      "motion_range_pct": 0.861,
+      "flags": [
+        "low_pose_motion"
+      ]
+    },
+    {
+      "row": 3,
+      "label": "up_back",
+      "frame_indices": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "gif": "qc_auto_up_back.gif",
+      "bbox_x_range": 0.5,
+      "alpha_x_range": 4.697,
+      "bottom_y_range": 0.0,
+      "visible_area_range_pct": 4.593,
+      "sequential_diff_pct": [
+        11.535,
+        10.954,
+        11.082,
+        11.765
+      ],
+      "loop_diff_pct": 11.765,
+      "motion_mean_pct": 11.334,
+      "motion_range_pct": 0.811,
+      "flags": [
+        "center_drift"
+      ]
+    }
+  ],
+  "created_at": "2026-06-18T09:07:32.002364+00:00"
+}

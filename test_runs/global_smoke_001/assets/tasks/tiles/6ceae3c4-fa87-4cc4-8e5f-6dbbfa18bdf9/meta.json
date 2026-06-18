@@ -1,0 +1,29 @@
+{
+  "task_id": "6ceae3c4-fa87-4cc4-8e5f-6dbbfa18bdf9",
+  "created_at": "2026-06-18T03:58:03.665569+00:00",
+  "asset_type": "tile",
+  "frame_layout": "terrain_source_8x8",
+  "frame_grid": [
+    8,
+    8
+  ],
+  "cell_size": 128,
+  "sheet_size": [
+    1024,
+    1024
+  ],
+  "style_lock_source_task": null,
+  "style_lock_source_candidate_index": null,
+  "style_lock_applied": false,
+  "reference_applied": false,
+  "user_prompt": "校园草地，RPG地图地表",
+  "enhanced_prompt": "Project-wide style contract: RPG game art first, cute colorful pixel-art map readability, limited cohesive palette, clean silhouettes, low-noise symbolic detail, crisp hand-placed pixels. RPG pixel art map tile, top-down orthographic ground art, cute colorful game tileset style, clean readable shapes, low-noise symbolic texture, limited cohesive palette, crisp hand-placed pixel details, no realism, no perspective, no characters, 64x64 runtime RPG tile asset Continuous terrain source sheet for reusable top-down RPG tiles. Generate one coherent RPG map ground field across the whole canvas, while mentally respecting an invisible 8x8 crop grid. Each future crop cell is one reusable terrain tile from the same RPG art family. Do not compose separate icons or independent cells. Avoid visible grid lines, gutters, borders, frames, labels, tile numbers, or UI marks.\nThe terrain should read as one connected RPG ground region before it is sliced, with broad continuous shapes and edges aligned so most boundaries cross cell edges cleanly. Keep palette, lighting, outline weight, and pixel density consistent everywhere. Use simplified color clusters, clear readable tile silhouettes, and sparse hand-placed details instead of dense procedural material noise. Leave clean reusable samples: interior fill areas, soft edge areas, curved boundary areas, corner-like transition areas, sparse-detail variants, and denser-but-still-readable variants. Tile boundaries should avoid single unique landmarks that would make one crop unusable elsewhere. 校园草地，RPG地图地表 whole canvas: complete continuous terrain source image, no visible grid invisible crop planning: 8x8 logical grid, each future tile remains useful after slicing edge compatibility: details continue naturally across crop boundaries, with no drawn dividers reuse intent: include repeated material motifs and several clean center/edge/transition samples",
+  "negative_prompt": "non-RPG style, photorealistic material texture, raw texture scan, generic texture sample, 3d render, noisy gritty surface, cinematic scene painting, realistic, photorealistic, blurry, noisy, high-frequency material texture, generic texture sample, raw material scan, gritty realism, characters, props, text, watermark, perspective view, complex scene, 3d render, isometric perspective, visible grid lines, gutters, labels, tile numbers, characters, props, roads, buildings, scene composition, perspective, cast shadows, black separators, thick outlines around cells, independent icons, mismatched texture scale, random unrelated texture cells, decorative frames, single central landmark, volcano cone, eruption plume, UI, text, photorealistic material texture, noisy raw texture sample, gritty surface scan, high-frequency speckle",
+  "model": "mock",
+  "output_size": 128,
+  "palette_colors": 0,
+  "requested_count": 1,
+  "status": "dry_run",
+  "error": null,
+  "candidates": []
+}

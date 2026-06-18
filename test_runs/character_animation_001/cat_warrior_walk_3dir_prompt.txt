@@ -4,4 +4,6 @@ one long spear held consistently, readable cat ears and tail, colorful but contr
 cute serious expression, no extra characters, body-only sprite frames, no attack effects, no motion trails.
 Keep the spear, armor silhouette, face markings, tail shape, color palette, and body scale consistent across all frames.
 Use clean RPG pixel-art animation poses with stable feet anchor and centered body in each cell.
-Generate only down/front, up/back, and left-facing walking rows; the right-facing row will be mirrored by code.
+Make the character smaller than the previous run: about 70 percent of each cell height, with clear empty magenta margin around ears, spear tip, tail, cape, and feet.
+Lock the spear and shield to the torso so they do not drift between frames; animate mostly the legs, feet, tail tip, and subtle body bob.
+Generate only down/front, left-facing, and up/back walking rows; the right-facing row will be mirrored by code.

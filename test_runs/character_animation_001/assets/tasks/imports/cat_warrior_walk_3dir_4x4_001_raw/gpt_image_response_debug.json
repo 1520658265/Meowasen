@@ -1,0 +1,29 @@
+{
+  "created_at": "2026-06-18T09:04:38.539690+00:00",
+  "task_id": "cat_warrior_walk_3dir_4x4_001_raw",
+  "headers": {
+    "server": "ESA",
+    "content-type": "application/json",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "set-cookie": "acw_tc=6f301e1217817733493152077ea509046db738fd5badf51554757e3037;path=/;HttpOnly;Max-Age=3600, cdn_sec_tc=6f301e1217817733493152077ea509046db738fd5badf51554757e3037;path=/;HttpOnly;Max-Age=3600",
+    "cache-control": "no-cache",
+    "content-encoding": "gzip",
+    "date": "Thu, 18 Jun 2026 09:04:37 GMT",
+    "vary": "Accept-Encoding, Accept-Encoding",
+    "via": "ens-cache8.l2hk12[128315,0,DP], ens-cache44.l2sg7[128350,0,DP], ens-cache13.cn8564[128479,0,DP], ens-cache13.cn8564[128487,0]",
+    "x-site-cache-status": "DYNAMIC",
+    "x-new-api-version": "v1.0.0-rc.11",
+    "x-oneapi-request-id": "202606180902294335989458268d9d6Rgeay9Kn",
+    "x-upstream-addr": "207.57.140.104:3000",
+    "timing-allow-origin": "*",
+    "eagleid": "6f301e1217817733493152077e"
+  },
+  "raw_response_keys": [
+    "created",
+    "data",
+    "output_format",
+    "size"
+  ],
+  "image_count": 1
+}

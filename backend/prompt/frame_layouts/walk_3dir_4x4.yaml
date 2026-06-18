@@ -1,0 +1,26 @@
+grid: [4, 4]
+description: >
+  16-cell square RPG walking source sheet arranged in a strict 4x4 grid.
+  Only three directions are authored by the model; the right-facing row will be
+  built later by mirroring the left-facing row in code. Row 1: facing
+  down/front. Row 2: facing left. Row 3: facing up/back. Row 4: duplicate
+  helper row, repeat the left-facing walk cycle with the same character and do
+  not invent a new direction. Each column is one walk-cycle frame. Keep the
+  same character, outfit, armor, weapon, shield, silhouette, proportions,
+  palette, and pixel-art rendering across every frame. One complete full-body
+  sprite per cell, centered with equal padding. The character should occupy
+  about 70 percent of each cell height, leaving generous safe margin for weapon
+  tips, ears, tail, and cape. No overlap, no merged bodies, no labels, no
+  scenery beyond the configured chroma-key background.
+frame_prompts:
+  - "column 1: left foot contact pose, opposite arm forward, clear walking silhouette"
+  - "column 2: passing pose, feet closer together, body one pixel higher, same torso and weapon anchor"
+  - "column 3: right foot contact pose, opposite arm forward, clear walking silhouette"
+  - "column 4: passing pose returning to the start, body one pixel lower, ready to loop to column 1"
+negative_extra: >
+  right-facing authored row, inconsistent character identity, different armor,
+  different cape, different shield emblem, different weapon, weapon drifting
+  away from the torso, shield changing size, mismatched scale, oversized sprite,
+  cropped ears, cropped weapon, cropped tail, cropped feet, diagonal view,
+  isometric view, side-scroller view, merged figures, overlapping sprites,
+  missing cell separation, text labels, frame numbers

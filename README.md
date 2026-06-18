@@ -65,6 +65,23 @@ python -B -m backend.cli select-frame --task-id <task_id> --candidate-index 0 --
 Use `--task-id <fixed_id>` on `generate` or `import-sheet` when a test should
 reuse one task directory instead of creating a new UUID.
 
+For four-direction RPG walk animation, prefer the optimized three-direction
+API route: ask the model for a square `walk_3dir_4x4` source sheet, then mirror
+the left-facing row into the right-facing row with code and run automatic walk
+QC. This keeps the paid API call at stable `1024x1024` while reducing direction
+inconsistency.
+
+```bash
+python -B tools/gpt_image_generate.py --asset-type character --frame-layout walk_3dir_4x4 --prompt-file <prompt.txt> --task-id <raw_task> --size 1024x1024 --count 1
+python -B -m backend.cli import-sheet --sheet-path assets/tasks/imports/<raw_task>/gpt_image_sheet_0.png --asset-type character --frame-layout walk_3dir_4x4 --prompt-file <prompt.txt> --task-id <source_task> --output-size 128 --palette-colors 0 --source-task-id <raw_task>
+python -B -m backend.cli build-walk-4dir --source-task-id <source_task> --task-id <walk_task> --output-size 128
+python -B -m backend.cli walk-qc --task-id <walk_task> --source processed --prefix qc_auto --scale 4 --fps 6
+```
+
+For pose-guided Gemini tests, use `tools/gemini_image_generate.py` with repeated
+`--reference-image` arguments. This script calls Gemini native `generateContent`
+and can pass both the approved static character and a local pose guide sheet.
+
 For the stable ImageHub path, generate one 2x2 candidate sheet and import it
 into a fixed sprite task:
 

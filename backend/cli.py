@@ -10,12 +10,14 @@ from backend.config import ConfigError, load_config
 from backend.generator.protocol import GeneratorError
 from backend.service.core_generation import (
     AlignFramesParams,
+    BuildWalk4DirParams,
     CoreGenerationService,
     ExportTilesParams,
     GenerateParams,
     ImportSheetParams,
     ReprocessParams,
     SelectFrameParams,
+    WalkQcParams,
 )
 from backend.terrain.pack import (
     RegisterTerrainSetParams,
@@ -64,6 +66,12 @@ def build_parser() -> argparse.ArgumentParser:
     generate.add_argument("--model", help="Override generator model for this request")
     generate.add_argument("--style-lock-task")
     generate.add_argument("--style-lock-candidate", type=int)
+    generate.add_argument(
+        "--reference-image",
+        action="append",
+        default=[],
+        help="Attach a local reference image for providers that support image input. Can be repeated.",
+    )
     generate.add_argument("--dry-run", action="store_true")
 
     reprocess = subparsers.add_parser("reprocess", help="Reprocess an existing candidate")
@@ -97,6 +105,30 @@ def build_parser() -> argparse.ArgumentParser:
     align.add_argument("--prefix", default="aligned")
     align.add_argument("--anchor", choices=["alpha_centroid", "bbox_center"], default="alpha_centroid")
     align.add_argument("--axis", choices=["x", "y", "xy"], default="x")
+
+    build_walk = subparsers.add_parser(
+        "build-walk-4dir",
+        help="Build a standard 4-direction walk task from a 4x4 source sheet, mirroring left into right",
+    )
+    build_walk.add_argument("--source-task-id", required=True)
+    build_walk.add_argument("--task-id")
+    build_walk.add_argument("--candidate-index", type=int, default=0)
+    build_walk.add_argument("--output-size", type=int)
+    build_walk.add_argument("--mirror-source-row", type=int, default=1)
+    build_walk.add_argument(
+        "--row-order",
+        nargs=4,
+        type=int,
+        help="Target row mapping. Use -1 for mirrored mirror-source-row. Default is inferred from source layout.",
+    )
+
+    walk_qc = subparsers.add_parser("walk-qc", help="Generate GIF previews and motion metrics for a walk task")
+    walk_qc.add_argument("--task-id", required=True)
+    walk_qc.add_argument("--candidate-index", type=int, default=0)
+    walk_qc.add_argument("--source", choices=["processed", "raw", "aligned"], default="processed")
+    walk_qc.add_argument("--prefix", default="qc_loop")
+    walk_qc.add_argument("--scale", type=int, default=4)
+    walk_qc.add_argument("--fps", type=int, default=6)
 
     import_sheet = subparsers.add_parser("import-sheet", help="Import an existing generated sheet")
     import_sheet.add_argument("--sheet-path", required=True)
@@ -265,6 +297,7 @@ def main(argv: list[str] | None = None) -> int:
                         model=args.model,
                         style_lock_task=args.style_lock_task,
                         style_lock_candidate=args.style_lock_candidate,
+                        reference_images=tuple(Path(path) for path in args.reference_image),
                         dry_run=args.dry_run,
                     )
                 )
@@ -305,6 +338,28 @@ def main(argv: list[str] | None = None) -> int:
                     prefix=args.prefix,
                     anchor=args.anchor,
                     axis=args.axis,
+                )
+            )
+        elif args.command == "build-walk-4dir":
+            manifest = service.build_walk_4dir(
+                BuildWalk4DirParams(
+                    source_task_id=args.source_task_id,
+                    task_id=args.task_id,
+                    candidate_index=args.candidate_index,
+                    output_size=args.output_size,
+                    mirror_source_row=args.mirror_source_row,
+                    row_order=tuple(args.row_order) if args.row_order is not None else None,
+                )
+            )
+        elif args.command == "walk-qc":
+            manifest = service.walk_qc(
+                WalkQcParams(
+                    task_id=args.task_id,
+                    candidate_index=args.candidate_index,
+                    source=args.source,
+                    prefix=args.prefix,
+                    scale=args.scale,
+                    fps=args.fps,
                 )
             )
         elif args.command == "import-sheet":
@@ -520,6 +575,8 @@ def _summary(manifest: dict) -> dict:
     if "root" in manifest and "matches" in manifest:
         return manifest
     if "tile_order" in manifest:
+        return manifest
+    if "rows" in manifest and "outputs" in manifest:
         return manifest
     if "pack_id" in manifest:
         return {

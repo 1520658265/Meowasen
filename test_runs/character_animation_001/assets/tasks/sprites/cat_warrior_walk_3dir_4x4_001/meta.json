@@ -1,0 +1,562 @@
+{
+  "task_id": "cat_warrior_walk_3dir_4x4_001",
+  "created_at": "2026-06-18T09:05:22.209817+00:00",
+  "asset_type": "character",
+  "frame_layout": "walk_3dir_4x4",
+  "frame_grid": [
+    4,
+    4
+  ],
+  "cell_size": 256,
+  "sheet_size": [
+    1024,
+    1024
+  ],
+  "style_lock_source_task": null,
+  "style_lock_source_candidate_index": null,
+  "style_lock_applied": false,
+  "reference_applied": false,
+  "user_prompt": "ornate cat warrior carrying a long spear, same role as the approved static sprite:\na heroic anthropomorphic cat warrior with ornate fantasy armor, compact RPG overworld proportions,\none long spear held consistently, readable cat ears and tail, colorful but controlled costume,\ncute serious expression, no extra characters, body-only sprite frames, no attack effects, no motion trails.\nKeep the spear, armor silhouette, face markings, tail shape, color palette, and body scale consistent across all frames.\nUse clean RPG pixel-art animation poses with stable feet anchor and centered body in each cell.\nMake the character smaller than the previous run: about 70 percent of each cell height, with clear empty magenta margin around ears, spear tip, tail, cape, and feet.\nLock the spear and shield to the torso so they do not drift between frames; animate mostly the legs, feet, tail tip, and subtle body bob.\nGenerate only down/front, left-facing, and up/back walking rows; the right-facing row will be mirrored by code.",
+  "enhanced_prompt": "ornate cat warrior carrying a long spear, same role as the approved static sprite:\na heroic anthropomorphic cat warrior with ornate fantasy armor, compact RPG overworld proportions,\none long spear held consistently, readable cat ears and tail, colorful but controlled costume,\ncute serious expression, no extra characters, body-only sprite frames, no attack effects, no motion trails.\nKeep the spear, armor silhouette, face markings, tail shape, color palette, and body scale consistent across all frames.\nUse clean RPG pixel-art animation poses with stable feet anchor and centered body in each cell.\nMake the character smaller than the previous run: about 70 percent of each cell height, with clear empty magenta margin around ears, spear tip, tail, cape, and feet.\nLock the spear and shield to the torso so they do not drift between frames; animate mostly the legs, feet, tail tip, and subtle body bob.\nGenerate only down/front, left-facing, and up/back walking rows; the right-facing row will be mirrored by code.",
+  "negative_prompt": "",
+  "model": "imported",
+  "output_size": 128,
+  "palette_colors": 0,
+  "requested_count": 1,
+  "status": "done",
+  "error": null,
+  "candidates": [
+    {
+      "index": 0,
+      "sheet": "sheet_0.png",
+      "style_lock_palette_b64": null,
+      "style_lock_histogram_json": null,
+      "provider_metadata": {
+        "backend": "import_sheet",
+        "source_path": "test_runs\\character_animation_001\\assets\\tasks\\imports\\cat_warrior_walk_3dir_4x4_001_raw\\gpt_image_sheet_0.png",
+        "source_task_id": "cat_warrior_walk_3dir_4x4_001_raw"
+      },
+      "frames": [
+        {
+          "frame_index": 0,
+          "grid_pos": [
+            0,
+            0
+          ],
+          "raw": "frame_0_0.png",
+          "processed": "processed_0_0.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 6404,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 1,
+            "component_count": 1,
+            "tiny_component_count": 0,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              14,
+              4,
+              114,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 1,
+          "grid_pos": [
+            0,
+            1
+          ],
+          "raw": "frame_0_1.png",
+          "processed": "processed_0_1.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 6647,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 3,
+            "component_count": 1,
+            "tiny_component_count": 0,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              20,
+              4,
+              108,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 2,
+          "grid_pos": [
+            0,
+            2
+          ],
+          "raw": "frame_0_2.png",
+          "processed": "processed_0_2.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 6713,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 2,
+            "component_count": 3,
+            "tiny_component_count": 2,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              13,
+              4,
+              114,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 3,
+          "grid_pos": [
+            0,
+            3
+          ],
+          "raw": "frame_0_3.png",
+          "processed": "processed_0_3.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 6600,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 0,
+            "component_count": 2,
+            "tiny_component_count": 1,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              19,
+              4,
+              108,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 4,
+          "grid_pos": [
+            1,
+            0
+          ],
+          "raw": "frame_0_4.png",
+          "processed": "processed_0_4.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 5584,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 3,
+            "component_count": 2,
+            "tiny_component_count": 1,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              16,
+              4,
+              111,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 5,
+          "grid_pos": [
+            1,
+            1
+          ],
+          "raw": "frame_0_5.png",
+          "processed": "processed_0_5.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 5492,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 2,
+            "component_count": 3,
+            "tiny_component_count": 2,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              16,
+              4,
+              112,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 6,
+          "grid_pos": [
+            1,
+            2
+          ],
+          "raw": "frame_0_6.png",
+          "processed": "processed_0_6.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 5472,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 1,
+            "component_count": 2,
+            "tiny_component_count": 1,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              16,
+              4,
+              111,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 7,
+          "grid_pos": [
+            1,
+            3
+          ],
+          "raw": "frame_0_7.png",
+          "processed": "processed_0_7.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 5439,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 3,
+            "component_count": 2,
+            "tiny_component_count": 1,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              17,
+              4,
+              111,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 8,
+          "grid_pos": [
+            2,
+            0
+          ],
+          "raw": "frame_0_8.png",
+          "processed": "processed_0_8.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 6286,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 1,
+            "component_count": 3,
+            "tiny_component_count": 2,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              18,
+              4,
+              110,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 9,
+          "grid_pos": [
+            2,
+            1
+          ],
+          "raw": "frame_0_9.png",
+          "processed": "processed_0_9.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 6004,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 0,
+            "component_count": 2,
+            "tiny_component_count": 1,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              23,
+              4,
+              105,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 10,
+          "grid_pos": [
+            2,
+            2
+          ],
+          "raw": "frame_0_10.png",
+          "processed": "processed_0_10.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 6253,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 2,
+            "component_count": 2,
+            "tiny_component_count": 1,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              18,
+              4,
+              109,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 11,
+          "grid_pos": [
+            2,
+            3
+          ],
+          "raw": "frame_0_11.png",
+          "processed": "processed_0_11.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 6018,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 0,
+            "component_count": 1,
+            "tiny_component_count": 0,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              22,
+              4,
+              105,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 12,
+          "grid_pos": [
+            3,
+            0
+          ],
+          "raw": "frame_0_12.png",
+          "processed": "processed_0_12.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 5537,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 4,
+            "component_count": 3,
+            "tiny_component_count": 2,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              16,
+              4,
+              111,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 13,
+          "grid_pos": [
+            3,
+            1
+          ],
+          "raw": "frame_0_13.png",
+          "processed": "processed_0_13.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 5503,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 3,
+            "component_count": 3,
+            "tiny_component_count": 2,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              16,
+              4,
+              112,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 14,
+          "grid_pos": [
+            3,
+            2
+          ],
+          "raw": "frame_0_14.png",
+          "processed": "processed_0_14.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 5479,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 7,
+            "component_count": 3,
+            "tiny_component_count": 2,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              16,
+              4,
+              111,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 15,
+          "grid_pos": [
+            3,
+            3
+          ],
+          "raw": "frame_0_15.png",
+          "processed": "processed_0_15.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 5509,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 4,
+            "component_count": 1,
+            "tiny_component_count": 0,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              16,
+              4,
+              112,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null
+        }
+      ],
+      "favorited": false,
+      "status": "done",
+      "error": null
+    }
+  ],
+  "import_source": {
+    "sheet_path": "test_runs\\character_animation_001\\assets\\tasks\\imports\\cat_warrior_walk_3dir_4x4_001_raw\\gpt_image_sheet_0.png",
+    "source_task_id": "cat_warrior_walk_3dir_4x4_001_raw"
+  }
+}

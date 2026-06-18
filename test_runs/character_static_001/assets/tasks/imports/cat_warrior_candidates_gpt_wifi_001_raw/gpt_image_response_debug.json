@@ -1,0 +1,29 @@
+{
+  "created_at": "2026-06-18T07:45:32.280985+00:00",
+  "task_id": "cat_warrior_candidates_gpt_wifi_001_raw",
+  "headers": {
+    "server": "ESA",
+    "content-type": "application/json",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "set-cookie": "acw_tc=6f301e1317817686151911060e1ec60a10ead0282b014d2172b8a5c22e;path=/;HttpOnly;Max-Age=3600, cdn_sec_tc=6f301e1317817686151911060e1ec60a10ead0282b014d2172b8a5c22e;path=/;HttpOnly;Max-Age=3600",
+    "cache-control": "no-cache",
+    "content-encoding": "gzip",
+    "date": "Thu, 18 Jun 2026 07:45:11 GMT",
+    "vary": "Accept-Encoding, Accept-Encoding",
+    "via": "ens-cache16.l2hk12[96665,0,DP], ens-cache26.l2sg7[96700,0,DP], ens-cache14.cn8564[96817,0,DP], ens-cache14.cn8564[96818,0]",
+    "x-site-cache-status": "DYNAMIC",
+    "x-new-api-version": "v1.0.0-rc.11",
+    "x-oneapi-request-id": "202606180743352900998048268d9d6l5SApnxu",
+    "x-upstream-addr": "38.95.76.82:3000",
+    "timing-allow-origin": "*",
+    "eagleid": "6f301e1317817686151911060e"
+  },
+  "raw_response_keys": [
+    "created",
+    "data",
+    "output_format",
+    "size"
+  ],
+  "image_count": 1
+}

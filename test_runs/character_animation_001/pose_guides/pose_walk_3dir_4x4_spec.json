@@ -1,0 +1,654 @@
+{
+  "kind": "rpg_walk_pose_guide",
+  "layout": "walk_3dir_4x4",
+  "tile_size": 256,
+  "rows": 4,
+  "cols": 4,
+  "row_contract": [
+    "row 1: down/front walk cycle",
+    "row 2: left-facing walk cycle",
+    "row 3: up/back walk cycle",
+    "row 4: helper duplicate of left-facing walk cycle"
+  ],
+  "column_contract": [
+    "column 1: left foot contact",
+    "column 2: passing pose, body up",
+    "column 3: right foot contact",
+    "column 4: passing pose, body down, loop-ready"
+  ],
+  "color_contract": {
+    "background": "#FF00FF chroma key",
+    "black": "skeleton contour and joints",
+    "blue": "torso line",
+    "red": "left leg and left arm",
+    "green": "right leg and right arm",
+    "purple": "locked weapon guide",
+    "yellow": "feet anchor marker"
+  },
+  "poses": [
+    {
+      "row": 0,
+      "col": 0,
+      "frame_index": 0,
+      "direction": "down_front",
+      "phase": "left_contact",
+      "body_shift": [
+        0,
+        0
+      ],
+      "left_foot": [
+        105,
+        204
+      ],
+      "right_foot": [
+        150,
+        190
+      ],
+      "left_hand": [
+        100,
+        133
+      ],
+      "right_hand": [
+        156,
+        133
+      ],
+      "weapon_tip": [
+        86,
+        53
+      ],
+      "weapon_base": [
+        86,
+        179
+      ],
+      "tail_tip": [
+        186,
+        159
+      ]
+    },
+    {
+      "row": 0,
+      "col": 1,
+      "frame_index": 1,
+      "direction": "down_front",
+      "phase": "passing_up",
+      "body_shift": [
+        0,
+        -7
+      ],
+      "left_foot": [
+        109,
+        199
+      ],
+      "right_foot": [
+        146,
+        192
+      ],
+      "left_hand": [
+        100,
+        126
+      ],
+      "right_hand": [
+        156,
+        126
+      ],
+      "weapon_tip": [
+        86,
+        46
+      ],
+      "weapon_base": [
+        86,
+        172
+      ],
+      "tail_tip": [
+        186,
+        152
+      ]
+    },
+    {
+      "row": 0,
+      "col": 2,
+      "frame_index": 2,
+      "direction": "down_front",
+      "phase": "right_contact",
+      "body_shift": [
+        0,
+        0
+      ],
+      "left_foot": [
+        118,
+        190
+      ],
+      "right_foot": [
+        137,
+        204
+      ],
+      "left_hand": [
+        100,
+        133
+      ],
+      "right_hand": [
+        156,
+        133
+      ],
+      "weapon_tip": [
+        86,
+        53
+      ],
+      "weapon_base": [
+        86,
+        179
+      ],
+      "tail_tip": [
+        186,
+        159
+      ]
+    },
+    {
+      "row": 0,
+      "col": 3,
+      "frame_index": 3,
+      "direction": "down_front",
+      "phase": "passing_down",
+      "body_shift": [
+        0,
+        5
+      ],
+      "left_foot": [
+        114,
+        192
+      ],
+      "right_foot": [
+        141,
+        199
+      ],
+      "left_hand": [
+        100,
+        138
+      ],
+      "right_hand": [
+        156,
+        138
+      ],
+      "weapon_tip": [
+        86,
+        58
+      ],
+      "weapon_base": [
+        86,
+        184
+      ],
+      "tail_tip": [
+        186,
+        164
+      ]
+    },
+    {
+      "row": 1,
+      "col": 0,
+      "frame_index": 4,
+      "direction": "left",
+      "phase": "left_contact",
+      "body_shift": [
+        0,
+        0
+      ],
+      "left_foot": [
+        102,
+        199
+      ],
+      "right_foot": [
+        152,
+        192
+      ],
+      "left_hand": [
+        100,
+        135
+      ],
+      "right_hand": [
+        142,
+        133
+      ],
+      "weapon_tip": [
+        94,
+        55
+      ],
+      "weapon_base": [
+        94,
+        177
+      ],
+      "tail_tip": [
+        190,
+        161
+      ]
+    },
+    {
+      "row": 1,
+      "col": 1,
+      "frame_index": 5,
+      "direction": "left",
+      "phase": "passing_up",
+      "body_shift": [
+        0,
+        -7
+      ],
+      "left_foot": [
+        111,
+        196
+      ],
+      "right_foot": [
+        145,
+        193
+      ],
+      "left_hand": [
+        100,
+        128
+      ],
+      "right_hand": [
+        142,
+        126
+      ],
+      "weapon_tip": [
+        94,
+        48
+      ],
+      "weapon_base": [
+        94,
+        170
+      ],
+      "tail_tip": [
+        190,
+        154
+      ]
+    },
+    {
+      "row": 1,
+      "col": 2,
+      "frame_index": 6,
+      "direction": "left",
+      "phase": "right_contact",
+      "body_shift": [
+        0,
+        0
+      ],
+      "left_foot": [
+        128,
+        192
+      ],
+      "right_foot": [
+        126,
+        199
+      ],
+      "left_hand": [
+        100,
+        135
+      ],
+      "right_hand": [
+        142,
+        133
+      ],
+      "weapon_tip": [
+        94,
+        55
+      ],
+      "weapon_base": [
+        94,
+        177
+      ],
+      "tail_tip": [
+        190,
+        161
+      ]
+    },
+    {
+      "row": 1,
+      "col": 3,
+      "frame_index": 7,
+      "direction": "left",
+      "phase": "passing_down",
+      "body_shift": [
+        0,
+        5
+      ],
+      "left_foot": [
+        121,
+        193
+      ],
+      "right_foot": [
+        135,
+        196
+      ],
+      "left_hand": [
+        100,
+        140
+      ],
+      "right_hand": [
+        142,
+        138
+      ],
+      "weapon_tip": [
+        94,
+        60
+      ],
+      "weapon_base": [
+        94,
+        182
+      ],
+      "tail_tip": [
+        190,
+        166
+      ]
+    },
+    {
+      "row": 2,
+      "col": 0,
+      "frame_index": 8,
+      "direction": "up_back",
+      "phase": "left_contact",
+      "body_shift": [
+        0,
+        0
+      ],
+      "left_foot": [
+        105,
+        204
+      ],
+      "right_foot": [
+        150,
+        190
+      ],
+      "left_hand": [
+        100,
+        130
+      ],
+      "right_hand": [
+        156,
+        130
+      ],
+      "weapon_tip": [
+        166,
+        53
+      ],
+      "weapon_base": [
+        166,
+        177
+      ],
+      "tail_tip": [
+        78,
+        169
+      ]
+    },
+    {
+      "row": 2,
+      "col": 1,
+      "frame_index": 9,
+      "direction": "up_back",
+      "phase": "passing_up",
+      "body_shift": [
+        0,
+        -7
+      ],
+      "left_foot": [
+        109,
+        199
+      ],
+      "right_foot": [
+        146,
+        192
+      ],
+      "left_hand": [
+        100,
+        123
+      ],
+      "right_hand": [
+        156,
+        123
+      ],
+      "weapon_tip": [
+        166,
+        46
+      ],
+      "weapon_base": [
+        166,
+        170
+      ],
+      "tail_tip": [
+        78,
+        162
+      ]
+    },
+    {
+      "row": 2,
+      "col": 2,
+      "frame_index": 10,
+      "direction": "up_back",
+      "phase": "right_contact",
+      "body_shift": [
+        0,
+        0
+      ],
+      "left_foot": [
+        118,
+        190
+      ],
+      "right_foot": [
+        137,
+        204
+      ],
+      "left_hand": [
+        100,
+        130
+      ],
+      "right_hand": [
+        156,
+        130
+      ],
+      "weapon_tip": [
+        166,
+        53
+      ],
+      "weapon_base": [
+        166,
+        177
+      ],
+      "tail_tip": [
+        78,
+        169
+      ]
+    },
+    {
+      "row": 2,
+      "col": 3,
+      "frame_index": 11,
+      "direction": "up_back",
+      "phase": "passing_down",
+      "body_shift": [
+        0,
+        5
+      ],
+      "left_foot": [
+        114,
+        192
+      ],
+      "right_foot": [
+        141,
+        199
+      ],
+      "left_hand": [
+        100,
+        135
+      ],
+      "right_hand": [
+        156,
+        135
+      ],
+      "weapon_tip": [
+        166,
+        58
+      ],
+      "weapon_base": [
+        166,
+        182
+      ],
+      "tail_tip": [
+        78,
+        174
+      ]
+    },
+    {
+      "row": 3,
+      "col": 0,
+      "frame_index": 12,
+      "direction": "left_helper",
+      "phase": "left_contact",
+      "body_shift": [
+        0,
+        0
+      ],
+      "left_foot": [
+        102,
+        199
+      ],
+      "right_foot": [
+        152,
+        192
+      ],
+      "left_hand": [
+        100,
+        135
+      ],
+      "right_hand": [
+        142,
+        133
+      ],
+      "weapon_tip": [
+        94,
+        55
+      ],
+      "weapon_base": [
+        94,
+        177
+      ],
+      "tail_tip": [
+        190,
+        161
+      ]
+    },
+    {
+      "row": 3,
+      "col": 1,
+      "frame_index": 13,
+      "direction": "left_helper",
+      "phase": "passing_up",
+      "body_shift": [
+        0,
+        -7
+      ],
+      "left_foot": [
+        111,
+        196
+      ],
+      "right_foot": [
+        145,
+        193
+      ],
+      "left_hand": [
+        100,
+        128
+      ],
+      "right_hand": [
+        142,
+        126
+      ],
+      "weapon_tip": [
+        94,
+        48
+      ],
+      "weapon_base": [
+        94,
+        170
+      ],
+      "tail_tip": [
+        190,
+        154
+      ]
+    },
+    {
+      "row": 3,
+      "col": 2,
+      "frame_index": 14,
+      "direction": "left_helper",
+      "phase": "right_contact",
+      "body_shift": [
+        0,
+        0
+      ],
+      "left_foot": [
+        128,
+        192
+      ],
+      "right_foot": [
+        126,
+        199
+      ],
+      "left_hand": [
+        100,
+        135
+      ],
+      "right_hand": [
+        142,
+        133
+      ],
+      "weapon_tip": [
+        94,
+        55
+      ],
+      "weapon_base": [
+        94,
+        177
+      ],
+      "tail_tip": [
+        190,
+        161
+      ]
+    },
+    {
+      "row": 3,
+      "col": 3,
+      "frame_index": 15,
+      "direction": "left_helper",
+      "phase": "passing_down",
+      "body_shift": [
+        0,
+        5
+      ],
+      "left_foot": [
+        121,
+        193
+      ],
+      "right_foot": [
+        135,
+        196
+      ],
+      "left_hand": [
+        100,
+        140
+      ],
+      "right_hand": [
+        142,
+        138
+      ],
+      "weapon_tip": [
+        94,
+        60
+      ],
+      "weapon_base": [
+        94,
+        182
+      ],
+      "tail_tip": [
+        190,
+        166
+      ]
+    }
+  ]
+}

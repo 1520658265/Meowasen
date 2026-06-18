@@ -75,6 +75,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--output-format", default="jpeg")
     parser.add_argument("--seed", default="")
     parser.add_argument("--negative-prompt", default="")
+    parser.add_argument(
+        "--reference-image",
+        action="append",
+        default=[],
+        help="Attach a local reference image as a data URL. Can be provided multiple times.",
+    )
     parser.add_argument("--count", type=int, default=1)
     parser.add_argument("--batch-id")
     parser.add_argument("--timeout", type=float, default=600.0)
@@ -108,6 +114,7 @@ def main(argv: list[str] | None = None) -> int:
     batch_id = args.batch_id or str(uuid.uuid4())
     full_prompt = _with_project_style_contract(args.full_prompt or _build_project_prompt(args, config))
     model = args.model or config.generator.model
+    reference_images = _load_reference_images(args.reference_image)
     request_bodies = [
         _build_body(
             args=args,
@@ -117,6 +124,7 @@ def main(argv: list[str] | None = None) -> int:
             total=args.count,
             model=model,
             prompt=full_prompt,
+            reference_images=reference_images,
         )
         for index in range(1, args.count + 1)
     ]
@@ -133,6 +141,14 @@ def main(argv: list[str] | None = None) -> int:
                 "proxy_env": _proxy_env_snapshot(),
             },
             "requests": [_redact_body(body) for body in request_bodies],
+            "reference_images": [
+                {
+                    "path": str(item["path"]),
+                    "mime_type": item["mime_type"],
+                    "bytes": item["bytes"],
+                }
+                for item in reference_images
+            ],
         },
     )
     (output_dir / "prompt.txt").write_text(full_prompt, encoding="utf-8")
@@ -265,6 +281,7 @@ def _build_body(
     total: int,
     model: str,
     prompt: str,
+    reference_images: list[dict[str, Any]],
 ) -> dict[str, Any]:
     return {
         "baseUrl": args.base_url,
@@ -284,9 +301,45 @@ def _build_body(
             "outputFormat": args.output_format,
             "seed": args.seed,
             "negativePrompt": args.negative_prompt,
-            "referenceImages": [],
+            "referenceImages": [item["data_url"] for item in reference_images],
         },
     }
+
+
+def _load_reference_images(paths: list[str]) -> list[dict[str, Any]]:
+    references: list[dict[str, Any]] = []
+    for raw_path in paths:
+        path = Path(raw_path)
+        if not path.exists():
+            raise FileNotFoundError(f"Reference image not found: {path}")
+        payload = path.read_bytes()
+        mime_type = _mime_type_for_reference(path, payload)
+        references.append(
+            {
+                "path": path,
+                "mime_type": mime_type,
+                "bytes": len(payload),
+                "data_url": f"data:{mime_type};base64,{base64.b64encode(payload).decode('ascii')}",
+            }
+        )
+    return references
+
+
+def _mime_type_for_reference(path: Path, payload: bytes) -> str:
+    detected_format = _detect_image_format(payload)
+    detected = (detected_format or "").upper()
+    if detected == "JPEG":
+        return "image/jpeg"
+    if detected == "PNG":
+        return "image/png"
+    if detected == "WEBP":
+        return "image/webp"
+    suffix = path.suffix.lower()
+    if suffix in {".jpg", ".jpeg"}:
+        return "image/jpeg"
+    if suffix == ".webp":
+        return "image/webp"
+    return "image/png"
 
 
 def _save_images(output_dir: Path, request_index: int, response: dict[str, Any]) -> list[str]:
@@ -372,7 +425,25 @@ def _redact_body(body: dict[str, Any]) -> dict[str, Any]:
     redacted = json.loads(json.dumps(body, ensure_ascii=False))
     if redacted.get("apiKey"):
         redacted["apiKey"] = "<redacted>"
+    request = redacted.get("request")
+    if isinstance(request, dict) and isinstance(request.get("referenceImages"), list):
+        request["referenceImages"] = [
+            _summarize_reference_data_url(value)
+            for value in request["referenceImages"]
+        ]
     return redacted
+
+
+def _summarize_reference_data_url(value: Any) -> dict[str, Any] | Any:
+    if not isinstance(value, str):
+        return value
+    match = re.match(r"^data:([^;,]+);base64,(.*)$", value, flags=re.DOTALL)
+    if not match:
+        return {"mime_type": None, "data_url_length": len(value)}
+    return {
+        "mime_type": match.group(1),
+        "base64_length": len(match.group(2)),
+    }
 
 
 def _write_json(path: Path, data: dict[str, Any]) -> None:

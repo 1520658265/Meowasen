@@ -1,0 +1,29 @@
+{
+  "created_at": "2026-06-18T08:19:39.189279+00:00",
+  "task_id": "cat_warrior_walk_4dir_001_raw",
+  "headers": {
+    "server": "ESA",
+    "content-type": "application/json",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "set-cookie": "acw_tc=d35b4ea217817707040005667eb94d0a06fb95c9bd7f0a1954dc7d966b;path=/;HttpOnly;Max-Age=3600, cdn_sec_tc=d35b4ea217817707040005667eb94d0a06fb95c9bd7f0a1954dc7d966b;path=/;HttpOnly;Max-Age=3600",
+    "cache-control": "no-cache",
+    "content-encoding": "gzip",
+    "date": "Thu, 18 Jun 2026 08:19:38 GMT",
+    "vary": "Accept-Encoding, Accept-Encoding",
+    "via": "ens-cache5.l2hk12[74329,0,DP], ens-cache18.l2sg9[74366,0,DP], ens-cache8.l2hk7[74470,0,DP], ens-cache14.cn9052[74653,0,DP], ens-cache14.cn9052[74658,0]",
+    "x-site-cache-status": "DYNAMIC",
+    "x-new-api-version": "v1.0.0-rc.11",
+    "x-oneapi-request-id": "202606180818242880769078268d9d6JtL9Avyy",
+    "x-upstream-addr": "209.146.112.182:3000",
+    "timing-allow-origin": "*",
+    "eagleid": "d35b4ea217817707040005667e"
+  },
+  "raw_response_keys": [
+    "created",
+    "data",
+    "output_format",
+    "size"
+  ],
+  "image_count": 1
+}

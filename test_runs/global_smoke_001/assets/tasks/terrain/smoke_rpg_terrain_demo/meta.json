@@ -1,0 +1,869 @@
+{
+  "task_id": "smoke_rpg_terrain_demo",
+  "created_at": "2026-06-18T04:02:34.482441+00:00",
+  "asset_type": "tile",
+  "frame_layout": "terrain_blob47",
+  "frame_grid": [
+    6,
+    8
+  ],
+  "cell_size": 64,
+  "sheet_size": [
+    512,
+    384
+  ],
+  "style_lock_source_task": null,
+  "style_lock_source_candidate_index": null,
+  "style_lock_applied": false,
+  "reference_applied": false,
+  "user_prompt": "procedural volcanic material kit autotile demo",
+  "enhanced_prompt": "procedural local validation for material kit to autotile expansion",
+  "negative_prompt": "",
+  "model": "procedural_material_kit_demo",
+  "output_size": 64,
+  "palette_colors": 0,
+  "requested_count": 1,
+  "status": "done",
+  "error": null,
+  "material_kit_mode": {
+    "source": "procedural_demo",
+    "seed": 17,
+    "animation_frames": 0,
+    "variants": 1,
+    "rule": "base/lava/crust/glow material samples expanded through fixed autotile masks",
+    "input": null
+  },
+  "candidates": [
+    {
+      "index": 0,
+      "sheet": "sheet_0.png",
+      "style_lock_palette_b64": null,
+      "style_lock_histogram_json": null,
+      "provider_metadata": {
+        "backend": "procedural_material_kit_demo"
+      },
+      "variant_sheet": null,
+      "frames": [
+        {
+          "frame_index": 0,
+          "grid_pos": [
+            0,
+            0
+          ],
+          "raw": "frame_0_0.png",
+          "processed": "processed_0_0.png",
+          "role": "blob_000",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 1,
+          "grid_pos": [
+            0,
+            1
+          ],
+          "raw": "frame_0_1.png",
+          "processed": "processed_0_1.png",
+          "role": "blob_001",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 2,
+          "grid_pos": [
+            0,
+            2
+          ],
+          "raw": "frame_0_2.png",
+          "processed": "processed_0_2.png",
+          "role": "blob_002",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 3,
+          "grid_pos": [
+            0,
+            3
+          ],
+          "raw": "frame_0_3.png",
+          "processed": "processed_0_3.png",
+          "role": "blob_004",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 4,
+          "grid_pos": [
+            1,
+            0
+          ],
+          "raw": "frame_0_4.png",
+          "processed": "processed_0_4.png",
+          "role": "blob_008",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 5,
+          "grid_pos": [
+            1,
+            1
+          ],
+          "raw": "frame_0_5.png",
+          "processed": "processed_0_5.png",
+          "role": "blob_003",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 6,
+          "grid_pos": [
+            1,
+            2
+          ],
+          "raw": "frame_0_6.png",
+          "processed": "processed_0_6.png",
+          "role": "blob_005",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 7,
+          "grid_pos": [
+            1,
+            3
+          ],
+          "raw": "frame_0_7.png",
+          "processed": "processed_0_7.png",
+          "role": "blob_006",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 8,
+          "grid_pos": [
+            2,
+            0
+          ],
+          "raw": "frame_0_8.png",
+          "processed": "processed_0_8.png",
+          "role": "blob_009",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 9,
+          "grid_pos": [
+            2,
+            1
+          ],
+          "raw": "frame_0_9.png",
+          "processed": "processed_0_9.png",
+          "role": "blob_010",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 10,
+          "grid_pos": [
+            2,
+            2
+          ],
+          "raw": "frame_0_10.png",
+          "processed": "processed_0_10.png",
+          "role": "blob_012",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 11,
+          "grid_pos": [
+            2,
+            3
+          ],
+          "raw": "frame_0_11.png",
+          "processed": "processed_0_11.png",
+          "role": "blob_019",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 12,
+          "grid_pos": [
+            3,
+            0
+          ],
+          "raw": "frame_0_12.png",
+          "processed": "processed_0_12.png",
+          "role": "blob_038",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 13,
+          "grid_pos": [
+            3,
+            1
+          ],
+          "raw": "frame_0_13.png",
+          "processed": "processed_0_13.png",
+          "role": "blob_076",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 14,
+          "grid_pos": [
+            3,
+            2
+          ],
+          "raw": "frame_0_14.png",
+          "processed": "processed_0_14.png",
+          "role": "blob_137",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 15,
+          "grid_pos": [
+            3,
+            3
+          ],
+          "raw": "frame_0_15.png",
+          "processed": "processed_0_15.png",
+          "role": "blob_007",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 16,
+          "grid_pos": [
+            4,
+            0
+          ],
+          "raw": "frame_0_16.png",
+          "processed": "processed_0_16.png",
+          "role": "blob_011",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 17,
+          "grid_pos": [
+            4,
+            1
+          ],
+          "raw": "frame_0_17.png",
+          "processed": "processed_0_17.png",
+          "role": "blob_013",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 18,
+          "grid_pos": [
+            4,
+            2
+          ],
+          "raw": "frame_0_18.png",
+          "processed": "processed_0_18.png",
+          "role": "blob_014",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 19,
+          "grid_pos": [
+            4,
+            3
+          ],
+          "raw": "frame_0_19.png",
+          "processed": "processed_0_19.png",
+          "role": "blob_023",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 20,
+          "grid_pos": [
+            5,
+            0
+          ],
+          "raw": "frame_0_20.png",
+          "processed": "processed_0_20.png",
+          "role": "blob_027",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 21,
+          "grid_pos": [
+            5,
+            1
+          ],
+          "raw": "frame_0_21.png",
+          "processed": "processed_0_21.png",
+          "role": "blob_039",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 22,
+          "grid_pos": [
+            5,
+            2
+          ],
+          "raw": "frame_0_22.png",
+          "processed": "processed_0_22.png",
+          "role": "blob_046",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 23,
+          "grid_pos": [
+            5,
+            3
+          ],
+          "raw": "frame_0_23.png",
+          "processed": "processed_0_23.png",
+          "role": "blob_077",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 24,
+          "grid_pos": [
+            6,
+            0
+          ],
+          "raw": "frame_0_24.png",
+          "processed": "processed_0_24.png",
+          "role": "blob_078",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 25,
+          "grid_pos": [
+            6,
+            1
+          ],
+          "raw": "frame_0_25.png",
+          "processed": "processed_0_25.png",
+          "role": "blob_139",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 26,
+          "grid_pos": [
+            6,
+            2
+          ],
+          "raw": "frame_0_26.png",
+          "processed": "processed_0_26.png",
+          "role": "blob_141",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 27,
+          "grid_pos": [
+            6,
+            3
+          ],
+          "raw": "frame_0_27.png",
+          "processed": "processed_0_27.png",
+          "role": "blob_055",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 28,
+          "grid_pos": [
+            7,
+            0
+          ],
+          "raw": "frame_0_28.png",
+          "processed": "processed_0_28.png",
+          "role": "blob_110",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 29,
+          "grid_pos": [
+            7,
+            1
+          ],
+          "raw": "frame_0_29.png",
+          "processed": "processed_0_29.png",
+          "role": "blob_155",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 30,
+          "grid_pos": [
+            7,
+            2
+          ],
+          "raw": "frame_0_30.png",
+          "processed": "processed_0_30.png",
+          "role": "blob_205",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 31,
+          "grid_pos": [
+            7,
+            3
+          ],
+          "raw": "frame_0_31.png",
+          "processed": "processed_0_31.png",
+          "role": "blob_015",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 32,
+          "grid_pos": [
+            8,
+            0
+          ],
+          "raw": "frame_0_32.png",
+          "processed": "processed_0_32.png",
+          "role": "blob_031",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 33,
+          "grid_pos": [
+            8,
+            1
+          ],
+          "raw": "frame_0_33.png",
+          "processed": "processed_0_33.png",
+          "role": "blob_047",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 34,
+          "grid_pos": [
+            8,
+            2
+          ],
+          "raw": "frame_0_34.png",
+          "processed": "processed_0_34.png",
+          "role": "blob_079",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 35,
+          "grid_pos": [
+            8,
+            3
+          ],
+          "raw": "frame_0_35.png",
+          "processed": "processed_0_35.png",
+          "role": "blob_143",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 36,
+          "grid_pos": [
+            9,
+            0
+          ],
+          "raw": "frame_0_36.png",
+          "processed": "processed_0_36.png",
+          "role": "blob_063",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 37,
+          "grid_pos": [
+            9,
+            1
+          ],
+          "raw": "frame_0_37.png",
+          "processed": "processed_0_37.png",
+          "role": "blob_095",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 38,
+          "grid_pos": [
+            9,
+            2
+          ],
+          "raw": "frame_0_38.png",
+          "processed": "processed_0_38.png",
+          "role": "blob_111",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 39,
+          "grid_pos": [
+            9,
+            3
+          ],
+          "raw": "frame_0_39.png",
+          "processed": "processed_0_39.png",
+          "role": "blob_159",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 40,
+          "grid_pos": [
+            10,
+            0
+          ],
+          "raw": "frame_0_40.png",
+          "processed": "processed_0_40.png",
+          "role": "blob_175",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 41,
+          "grid_pos": [
+            10,
+            1
+          ],
+          "raw": "frame_0_41.png",
+          "processed": "processed_0_41.png",
+          "role": "blob_207",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 42,
+          "grid_pos": [
+            10,
+            2
+          ],
+          "raw": "frame_0_42.png",
+          "processed": "processed_0_42.png",
+          "role": "blob_127",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 43,
+          "grid_pos": [
+            10,
+            3
+          ],
+          "raw": "frame_0_43.png",
+          "processed": "processed_0_43.png",
+          "role": "blob_191",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 44,
+          "grid_pos": [
+            11,
+            0
+          ],
+          "raw": "frame_0_44.png",
+          "processed": "processed_0_44.png",
+          "role": "blob_223",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 45,
+          "grid_pos": [
+            11,
+            1
+          ],
+          "raw": "frame_0_45.png",
+          "processed": "processed_0_45.png",
+          "role": "blob_239",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 46,
+          "grid_pos": [
+            11,
+            2
+          ],
+          "raw": "frame_0_46.png",
+          "processed": "processed_0_46.png",
+          "role": "blob_255",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        },
+        {
+          "frame_index": 47,
+          "grid_pos": [
+            11,
+            3
+          ],
+          "raw": "frame_0_47.png",
+          "processed": "processed_0_47.png",
+          "role": "neutral_base",
+          "bg_removed": false,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        }
+      ],
+      "favorited": false,
+      "status": "done",
+      "error": null
+    }
+  ]
+}

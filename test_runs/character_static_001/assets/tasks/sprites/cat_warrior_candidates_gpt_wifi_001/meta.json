@@ -1,0 +1,228 @@
+{
+  "task_id": "cat_warrior_candidates_gpt_wifi_001",
+  "created_at": "2026-06-18T07:45:58.936108+00:00",
+  "asset_type": "character",
+  "frame_layout": "character_candidates_2x2",
+  "frame_grid": [
+    2,
+    2
+  ],
+  "cell_size": 512,
+  "sheet_size": [
+    1024,
+    1024
+  ],
+  "style_lock_source_task": null,
+  "style_lock_source_candidate_index": null,
+  "style_lock_applied": false,
+  "reference_applied": false,
+  "user_prompt": "ornate cat warrior carrying a long spear on the back, RPG overworld map character, front-facing standing pose, full body and full spear inside the canvas, safe margin around the subject. Luxurious outfit simplified into large readable color blocks and a clear silhouette. The spear should be slightly thick and readable at small RPG sprite scale. Avoid too many tiny decorations.",
+  "enhanced_prompt": "ornate cat warrior carrying a long spear on the back, RPG overworld map character, front-facing standing pose, full body and full spear inside the canvas, safe margin around the subject. Luxurious outfit simplified into large readable color blocks and a clear silhouette. The spear should be slightly thick and readable at small RPG sprite scale. Avoid too many tiny decorations.",
+  "negative_prompt": "",
+  "model": "imported",
+  "output_size": 128,
+  "palette_colors": 0,
+  "requested_count": 1,
+  "status": "done",
+  "error": null,
+  "candidates": [
+    {
+      "index": 0,
+      "sheet": "sheet_0.png",
+      "style_lock_palette_b64": null,
+      "style_lock_histogram_json": null,
+      "provider_metadata": {
+        "backend": "import_sheet",
+        "source_path": "test_runs\\character_static_001\\assets\\tasks\\imports\\cat_warrior_candidates_gpt_wifi_001_raw\\gpt_image_sheet_0.png",
+        "source_task_id": null
+      },
+      "frames": [
+        {
+          "frame_index": 0,
+          "grid_pos": [
+            0,
+            0
+          ],
+          "raw": "frame_0_0.png",
+          "processed": "processed_0_0.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 6116,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 1,
+            "component_count": 2,
+            "tiny_component_count": 1,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              16,
+              4,
+              111,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null,
+          "selected": false,
+          "preview_384": "preview_384_0_0.png"
+        },
+        {
+          "frame_index": 1,
+          "grid_pos": [
+            0,
+            1
+          ],
+          "raw": "frame_0_1.png",
+          "processed": "processed_0_1.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 6101,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 2,
+            "component_count": 1,
+            "tiny_component_count": 0,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              16,
+              4,
+              111,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null,
+          "selected": true,
+          "preview_384": "preview_384_0_1.png"
+        },
+        {
+          "frame_index": 2,
+          "grid_pos": [
+            1,
+            0
+          ],
+          "raw": "frame_0_2.png",
+          "processed": "processed_0_2.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 5945,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 27,
+            "component_count": 9,
+            "tiny_component_count": 8,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              16,
+              4,
+              111,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null,
+          "selected": false,
+          "preview_384": "preview_384_0_2.png"
+        },
+        {
+          "frame_index": 3,
+          "grid_pos": [
+            1,
+            1
+          ],
+          "raw": "frame_0_3.png",
+          "processed": "processed_0_3.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "warning",
+            "flags": [
+              "subject_overflow"
+            ]
+          },
+          "postprocess_metrics": {
+            "visible_pixels": 6111,
+            "key_residual_pixels": 0,
+            "broad_key_residual_pixels": 2,
+            "component_count": 1,
+            "tiny_component_count": 0,
+            "edge_visible_pixels": 0,
+            "alpha_bbox": [
+              16,
+              4,
+              111,
+              124
+            ]
+          },
+          "status": "done",
+          "error": null,
+          "selected": false,
+          "preview_384": "preview_384_0_3.png"
+        }
+      ],
+      "favorited": false,
+      "status": "done",
+      "error": null
+    }
+  ],
+  "import_source": {
+    "sheet_path": "test_runs\\character_static_001\\assets\\tasks\\imports\\cat_warrior_candidates_gpt_wifi_001_raw\\gpt_image_sheet_0.png",
+    "source_task_id": null
+  },
+  "selected_frame": {
+    "candidate_index": 0,
+    "frame_index": 1,
+    "processed": "selected_processed.png",
+    "raw": "selected_raw.png",
+    "overwrite_primary": true,
+    "primary_processed": "processed_0_0.png",
+    "created_at": "2026-06-18T07:47:12.073983+00:00",
+    "postprocess_metrics": {
+      "visible_pixels": 6101,
+      "key_residual_pixels": 0,
+      "broad_key_residual_pixels": 2,
+      "component_count": 1,
+      "tiny_component_count": 0,
+      "edge_visible_pixels": 0,
+      "alpha_bbox": [
+        16,
+        4,
+        111,
+        124
+      ]
+    }
+  },
+  "exports": [
+    {
+      "candidate_index": 0,
+      "source": "raw",
+      "output_size": 384,
+      "palette_colors": 0,
+      "prefix": "preview",
+      "created_at": "2026-06-18T07:51:18.765401+00:00"
+    },
+    {
+      "candidate_index": 0,
+      "source": "raw",
+      "output_size": 384,
+      "palette_colors": 0,
+      "canvas_padding": 32,
+      "prefix": "preview",
+      "created_at": "2026-06-18T07:53:07.745349+00:00"
+    }
+  ]
+}

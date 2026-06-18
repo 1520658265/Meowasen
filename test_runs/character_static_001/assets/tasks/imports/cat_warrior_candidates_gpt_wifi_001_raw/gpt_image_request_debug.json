@@ -1,0 +1,21 @@
+{
+  "created_at": "2026-06-18T07:43:32.965113+00:00",
+  "task_id": "cat_warrior_candidates_gpt_wifi_001_raw",
+  "url": "https://bobdong.cn/v1/images/generations",
+  "method": "POST",
+  "headers": {
+    "Authorization": "Bearer <redacted>",
+    "Content-Type": "application/json"
+  },
+  "transport": {
+    "httpx_trust_env": true,
+    "proxy_env": {}
+  },
+  "payload": {
+    "model": "gpt-image-2",
+    "prompt": "Project-wide style contract: RPG game art first, cute colorful pixel-art map readability, limited cohesive palette, clean silhouettes, low-noise symbolic detail, crisp hand-placed pixels. RPG pixel art style, game sprite, single character, centered composition on the configured chroma-key background, clear readable silhouette, strong pose, limited color palette, no scenery or background details, RPG overworld readability, front-facing view, native low-resolution RPG sprite design, readable at 128x128 and 64x64, chunky pixel clusters, large simple color blocks, crisp hard pixel edges, bold 1-2 pixel dark outline, simplified ornament shapes, avoid tiny high-frequency costume details, avoid soft painterly shading, 64x64 pixel game asset Generation background contract: use a flat solid chroma-key background with exact RGB(255,0,255), hex #FF00FF, filling every cell behind the subject. This is not final transparency; alpha transparency is created only by post-processing. Keep RGB(255,0,255) / #FF00FF out of the character, object, weapon, outfit, highlights, and effects. 2 by 2 character candidate sheet, four alternative versions of the same single RPG overworld character. Each cell contains exactly one full-body character on the configured chroma-key background, centered with safe margins. Keep the same role, equipment, pose family, pixel scale, palette family, and front-facing RPG sprite view across all four candidates. The four cells are alternatives for manual selection, not an animation and not different directions. ornate cat warrior carrying a long spear on the back, RPG overworld map character, front-facing standing pose, full body and full spear inside the canvas, safe margin around the subject. Luxurious outfit simplified into large readable color blocks and a clear silhouette. The spear should be slightly thick and readable at small RPG sprite scale. Avoid too many tiny decorations. top left: candidate A, same character description top right: candidate B, same character description bottom left: candidate C, same character description bottom right: candidate D, same character description Create one image only. Target canvas: 1024x1024. Frame layout: character_candidates_2x2, grid=2x2. Strictly follow the grid. Return only the image. avoid: non-RPG style, photorealistic material texture, raw texture scan, generic texture sample, 3d render, noisy gritty surface, cinematic scene painting, realistic, photorealistic, blurry, noisy, background clutter, multiple characters, text, watermark, 3d render, anime portrait, realistic proportions, high-resolution illustration, soft brushwork, airbrushed gradients, tiny jewelry details, dense micro details, transparent background, checkerboard transparency grid, fake transparency, gradient background, textured background, scenery, floor plane, cast shadow, contact shadow, white background, black background, using RGB(255,0,255) or #FF00FF on the subject, different characters, different species, different equipment, animation sequence, walk cycle, turn-around views, side view, back view, merged cells, overlapping sprites, missing character, cropped body, cropped weapon, labels, text, visible grid lines, borders between cells",
+    "size": "1024x1024",
+    "n": 1,
+    "stream": true
+  }
+}

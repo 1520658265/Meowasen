@@ -1,0 +1,73 @@
+{
+  "task_id": "4ae72ce5-91b7-47c0-afa9-0974a955be78",
+  "created_at": "2026-06-18T05:44:23.644431+00:00",
+  "asset_type": "character",
+  "frame_layout": "single",
+  "frame_grid": [
+    1,
+    1
+  ],
+  "cell_size": 256,
+  "sheet_size": [
+    256,
+    256
+  ],
+  "style_lock_source_task": null,
+  "style_lock_source_candidate_index": null,
+  "style_lock_applied": false,
+  "reference_applied": false,
+  "user_prompt": "华丽服装的背着长枪的猫战士",
+  "enhanced_prompt": "Project-wide style contract: RPG game art first, cute colorful pixel-art map readability, limited cohesive palette, clean silhouettes, low-noise symbolic detail, crisp hand-placed pixels. RPG pixel art style, game sprite, single character, centered composition on the configured chroma-key background, clear readable silhouette, strong pose, limited color palette, no scenery or background details, RPG overworld readability, front-facing view, 64x64 pixel game asset Generation background contract: use a flat solid chroma-key background with exact RGB(255,0,255), hex #FF00FF, filling every cell behind the subject. This is not final transparency; alpha transparency is created only by post-processing. Keep RGB(255,0,255) / #FF00FF out of the character, object, weapon, outfit, highlights, and effects. single sprite, one subject only, centered in the image 华丽服装的背着长枪的猫战士",
+  "negative_prompt": "non-RPG style, photorealistic material texture, raw texture scan, generic texture sample, 3d render, noisy gritty surface, cinematic scene painting, realistic, photorealistic, blurry, noisy, background clutter, multiple characters, text, watermark, 3d render, anime portrait, realistic proportions, transparent background, checkerboard transparency grid, fake transparency, gradient background, textured background, scenery, floor plane, cast shadow, contact shadow, white background, black background, using RGB(255,0,255) or #FF00FF on the subject, multiple views, sprite sheet grid, duplicated subject",
+  "model": "mock",
+  "output_size": 128,
+  "palette_colors": 16,
+  "requested_count": 1,
+  "status": "done",
+  "error": null,
+  "candidates": [
+    {
+      "index": 0,
+      "sheet": "sheet_0.png",
+      "style_lock_palette_b64": null,
+      "style_lock_histogram_json": null,
+      "provider_metadata": {
+        "backend": "mock",
+        "model": "mock",
+        "reference_applied": false,
+        "seed_applied": false,
+        "requested_size": [
+          256,
+          256
+        ]
+      },
+      "frames": [
+        {
+          "frame_index": 0,
+          "grid_pos": [
+            0,
+            0
+          ],
+          "raw": "frame_0_0.png",
+          "processed": "processed_0_0.png",
+          "bg_removed": true,
+          "split_quality": {
+            "status": "ok",
+            "flags": []
+          },
+          "status": "done",
+          "error": null
+        }
+      ],
+      "favorited": false,
+      "status": "done",
+      "error": null
+    }
+  ],
+  "provider_capabilities": {
+    "supports_reference_images": false,
+    "supports_image_edit": false,
+    "supports_custom_size": true,
+    "supports_seed": true
+  }
+}

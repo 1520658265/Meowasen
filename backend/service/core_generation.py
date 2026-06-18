@@ -2,14 +2,16 @@ from __future__ import annotations
 
 import asyncio
 import io
+import json
 import shutil
 import uuid
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from statistics import mean
 from pathlib import Path
 from typing import Any
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageChops, ImageDraw
 
 from backend.config import AppConfig
 from backend.generator.factory import create_provider
@@ -39,6 +41,7 @@ class GenerateParams:
     model: str | None = None
     style_lock_task: str | None = None
     style_lock_candidate: int | None = None
+    reference_images: tuple[Path, ...] = ()
     dry_run: bool = False
 
 
@@ -97,6 +100,26 @@ class ExportTilesParams:
     prefix: str = "export"
 
 
+@dataclass(frozen=True)
+class BuildWalk4DirParams:
+    source_task_id: str
+    task_id: str | None = None
+    candidate_index: int = 0
+    output_size: int | None = None
+    mirror_source_row: int = 1
+    row_order: tuple[int, int, int, int] | None = None
+
+
+@dataclass(frozen=True)
+class WalkQcParams:
+    task_id: str
+    candidate_index: int = 0
+    source: str = "processed"
+    prefix: str = "qc_loop"
+    scale: int = 4
+    fps: int = 6
+
+
 class CoreGenerationService:
     def __init__(self, config: AppConfig) -> None:
         self.config = config
@@ -117,6 +140,7 @@ class CoreGenerationService:
         sheet_width = cols * cell_size
         sheet_height = rows * cell_size
         style_lock = self._load_style_lock(params.style_lock_task, params.style_lock_candidate)
+        reference_images = self._load_reference_images(params.reference_images)
 
         task_id = params.task_id or str(uuid.uuid4())
         task_path = task_dir(
@@ -135,6 +159,11 @@ class CoreGenerationService:
             sheet_size=(sheet_width, sheet_height),
             style_lock=style_lock,
         )
+        if reference_images:
+            manifest["manual_reference_images"] = [
+                {"path": str(path), "bytes": size}
+                for path, size, _payload in reference_images
+            ]
         write_manifest(task_path, manifest)
 
         if params.dry_run:
@@ -158,7 +187,10 @@ class CoreGenerationService:
             sheet_height=sheet_height,
             style_lock=style_lock,
             provider_options=self.config.generator.provider_options,
-            reference_images=(style_lock or {}).get("reference_images", []),
+            reference_images=[
+                *(style_lock or {}).get("reference_images", []),
+                *[payload for _path, _size, payload in reference_images],
+            ],
             debug_dir=str(task_path),
         )
 
@@ -525,6 +557,414 @@ class CoreGenerationService:
         write_manifest(task_path, manifest)
         return manifest
 
+    def build_walk_4dir(self, params: BuildWalk4DirParams) -> dict[str, Any]:
+        source_path = resolve_task_dir(self.config.paths.assets_dir, params.source_task_id)
+        source_manifest = read_manifest(source_path)
+        source_candidate = find_candidate(source_manifest, params.candidate_index)
+        source_grid = tuple(source_manifest.get("frame_grid") or [4, 4])
+        if source_grid != (4, 4):
+            raise ValueError(f"Source walk task must be a 4x4 sheet, got: {source_grid}")
+
+        output_size = params.output_size or int(source_manifest.get("output_size") or self.config.output.default_size)
+        task_id = params.task_id or f"{params.source_task_id}_walk_4dir"
+        task_path = task_dir(self.config.paths.assets_dir, task_id, "sprites")
+        task_path.mkdir(parents=True, exist_ok=True)
+
+        frames_by_index = {
+            int(frame.get("frame_index")): frame
+            for frame in source_candidate.get("frames", [])
+            if frame.get("processed")
+        }
+        if len(frames_by_index) < 16:
+            raise ValueError(f"Source candidate must contain 16 processed frames, got: {len(frames_by_index)}")
+
+        manifest = self._new_manifest(
+            task_id=task_id,
+            params=GenerateParams(
+                asset_type="character",
+                frame_layout="walk_4dir",
+                user_prompt=source_manifest.get("user_prompt") or "walk_4dir built from mirrored source",
+                task_id=task_id,
+                output_size=output_size,
+                cell_size=output_size,
+                palette_colors=int(source_manifest.get("palette_colors") or 0),
+                model="postprocess",
+            ),
+            resolved={
+                "frame_layout": "walk_4dir",
+                "count": 1,
+                "output_size": output_size,
+                "cell_size": output_size,
+                "palette_colors": int(source_manifest.get("palette_colors") or 0),
+                "canvas_padding": 0,
+                "model": "postprocess",
+            },
+            enhanced_prompt=source_manifest.get("enhanced_prompt") or source_manifest.get("user_prompt") or "",
+            negative_prompt=source_manifest.get("negative_prompt") or "",
+            frame_grid=(4, 4),
+            sheet_size=(output_size * 4, output_size * 4),
+            style_lock=None,
+        )
+        manifest["status"] = "running"
+        row_order = params.row_order or self._default_walk_row_order(source_manifest.get("frame_layout"))
+        manifest["derived_from"] = {
+            "task_id": params.source_task_id,
+            "candidate_index": params.candidate_index,
+            "operation": "mirror_left_to_right",
+            "mirror_source_row": params.mirror_source_row,
+            "row_order": list(row_order),
+        }
+        candidate = {
+            "index": 0,
+            "sheet": "sheet_0.png",
+            "style_lock_palette_b64": None,
+            "style_lock_histogram_json": None,
+            "provider_metadata": {
+                "backend": "postprocess",
+                "source_task_id": params.source_task_id,
+                "source_candidate_index": params.candidate_index,
+            },
+            "frames": [],
+            "favorited": False,
+            "status": "running",
+            "error": None,
+        }
+        manifest["candidates"].append(candidate)
+
+        sheet = Image.new("RGBA", (output_size * 4, output_size * 4), (0, 0, 0, 0))
+        for target_row, source_row in enumerate(row_order):
+            mirrored = source_row < 0
+            actual_source_row = params.mirror_source_row if mirrored else source_row
+            for col in range(4):
+                source_index = actual_source_row * 4 + col
+                source_frame = frames_by_index[source_index]
+                source_name = source_frame["processed"]
+                image = Image.open(source_path / source_name).convert("RGBA")
+                if image.size != (output_size, output_size):
+                    image = image.resize((output_size, output_size), Image.Resampling.NEAREST)
+                if mirrored:
+                    image = image.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
+
+                frame_index = target_row * 4 + col
+                processed_name = f"processed_0_{frame_index}.png"
+                raw_name = f"frame_0_{frame_index}.png"
+                save_png(image, task_path / processed_name)
+                save_png(image, task_path / raw_name)
+                self._write_processed_previews(task_path, processed_name)
+                sheet.alpha_composite(image, (col * output_size, target_row * output_size))
+                metrics = self.processor.sprite_quality_metrics(image)
+                candidate["frames"].append(
+                    {
+                        "frame_index": frame_index,
+                        "grid_pos": [target_row, col],
+                        "raw": raw_name,
+                        "processed": processed_name,
+                        "bg_removed": True,
+                        "split_quality": {"status": "done", "flags": []},
+                        "postprocess_metrics": metrics,
+                        "status": "done",
+                        "error": None,
+                        "derived_from": {
+                            "frame_index": source_index,
+                            "row": actual_source_row,
+                            "mirrored": mirrored,
+                        },
+                    }
+                )
+
+        save_png(sheet, task_path / "sheet_0.png")
+        candidate["status"] = "done"
+        manifest["status"] = "done"
+        manifest["sheet_size"] = [sheet.width, sheet.height]
+        write_manifest(task_path, manifest)
+        return manifest
+
+    def walk_qc(self, params: WalkQcParams) -> dict[str, Any]:
+        if params.source not in {"processed", "raw", "aligned"}:
+            raise ValueError(f"Unsupported walk QC source: {params.source}")
+        if params.scale <= 0:
+            raise ValueError("QC scale must be greater than 0")
+        if params.fps <= 0:
+            raise ValueError("QC fps must be greater than 0")
+
+        task_path = resolve_task_dir(self.config.paths.assets_dir, params.task_id)
+        manifest = read_manifest(task_path)
+        candidate = find_candidate(manifest, params.candidate_index)
+        frame_grid = tuple(manifest.get("frame_grid") or [1, 1])
+        frames = sorted(candidate.get("frames", []), key=lambda item: int(item.get("frame_index", 0)))
+        frame_data: list[dict[str, Any]] = []
+        for frame in frames:
+            source_name = frame.get(params.source) or frame.get("processed")
+            if not source_name:
+                continue
+            source_path = task_path / source_name
+            if not source_path.exists():
+                continue
+            image = Image.open(source_path).convert("RGBA")
+            frame_data.append(
+                {
+                    "frame": frame,
+                    "image": image,
+                    "metrics": self._walk_frame_metrics(image),
+                }
+            )
+
+        if not frame_data:
+            raise ValueError(f"No frames found for walk QC source: {params.source}")
+
+        rows = int(frame_grid[0])
+        cols = int(frame_grid[1])
+        row_labels = self._walk_row_labels(manifest.get("frame_layout"), rows)
+        row_summaries = []
+        for row in range(rows):
+            row_frames = [
+                item
+                for item in frame_data
+                if int(item["frame"].get("grid_pos", [item["frame"].get("frame_index", 0) // cols, 0])[0]) == row
+            ]
+            if not row_frames:
+                continue
+            row_summaries.append(
+                self._walk_row_qc(
+                    row=row,
+                    label=row_labels[row] if row < len(row_labels) else f"row_{row}",
+                    frames=row_frames,
+                    task_path=task_path,
+                    prefix=params.prefix,
+                    scale=params.scale,
+                    fps=params.fps,
+                )
+            )
+        all_gif = self._write_walk_all_gif(
+            frame_data=frame_data,
+            rows=rows,
+            cols=cols,
+            task_path=task_path,
+            prefix=params.prefix,
+            scale=params.scale,
+            fps=params.fps,
+        )
+        qc = {
+            "task_id": params.task_id,
+            "candidate_index": params.candidate_index,
+            "source": params.source,
+            "frame_layout": manifest.get("frame_layout"),
+            "frame_grid": list(frame_grid),
+            "outputs": {
+                "all_directions_gif": all_gif,
+                "row_gifs": [item["gif"] for item in row_summaries if item.get("gif")],
+            },
+            "rows": row_summaries,
+            "created_at": datetime.now(UTC).isoformat(),
+        }
+        (task_path / f"{params.prefix}_metrics.json").write_text(
+            json.dumps(qc, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+        manifest.setdefault("walk_qc", []).append(qc)
+        write_manifest(task_path, manifest)
+        return qc
+
+    def _walk_row_qc(
+        self,
+        row: int,
+        label: str,
+        frames: list[dict[str, Any]],
+        task_path: Path,
+        prefix: str,
+        scale: int,
+        fps: int,
+    ) -> dict[str, Any]:
+        ordered = sorted(frames, key=lambda item: int(item["frame"].get("frame_index", 0)))
+        images = [item["image"] for item in ordered]
+        metrics = [item["metrics"] for item in ordered]
+        diffs = [
+            self._walk_diff_score(images[index], images[(index + 1) % len(images)])
+            for index in range(len(images))
+        ]
+        gif = self._write_walk_gif(
+            images=images,
+            task_path=task_path,
+            output_name=f"{prefix}_{self._safe_name(label)}.gif",
+            scale=scale,
+            fps=fps,
+        )
+        bbox_x = [item["bbox_center"][0] for item in metrics if item.get("bbox_center")]
+        alpha_x = [item["alpha_centroid"][0] for item in metrics if item.get("alpha_centroid")]
+        bottom_y = [item["bottom_y"] for item in metrics if item.get("bottom_y") is not None]
+        areas = [int(item["visible_pixels"]) for item in metrics if item.get("visible_pixels") is not None]
+        flags = []
+        motion_mean = mean(diffs) if diffs else 0.0
+        motion_range = (max(diffs) - min(diffs)) if diffs else 0.0
+        bbox_x_range = self._number_range(bbox_x)
+        alpha_x_range = self._number_range(alpha_x)
+        bottom_y_range = self._number_range(bottom_y)
+        area_range_pct = self._area_range_pct(areas)
+        if bottom_y_range > 1.0:
+            flags.append("foot_anchor_drift")
+        if bbox_x_range > 3.0 or alpha_x_range > 4.0:
+            flags.append("center_drift")
+        if motion_mean < 6.0:
+            flags.append("low_pose_motion")
+        if motion_range > 5.0:
+            flags.append("uneven_pose_motion")
+        if area_range_pct > 8.0:
+            flags.append("scale_or_detail_drift")
+        return {
+            "row": row,
+            "label": label,
+            "frame_indices": [int(item["frame"].get("frame_index", 0)) for item in ordered],
+            "gif": gif,
+            "bbox_x_range": round(bbox_x_range, 3),
+            "alpha_x_range": round(alpha_x_range, 3),
+            "bottom_y_range": round(bottom_y_range, 3),
+            "visible_area_range_pct": round(area_range_pct, 3),
+            "sequential_diff_pct": [round(value, 3) for value in diffs],
+            "loop_diff_pct": round(diffs[-1], 3) if diffs else 0,
+            "motion_mean_pct": round(motion_mean, 3),
+            "motion_range_pct": round(motion_range, 3),
+            "flags": flags,
+        }
+
+    def _write_walk_all_gif(
+        self,
+        frame_data: list[dict[str, Any]],
+        rows: int,
+        cols: int,
+        task_path: Path,
+        prefix: str,
+        scale: int,
+        fps: int,
+    ) -> str:
+        if not frame_data:
+            return ""
+        by_pos: dict[tuple[int, int], Image.Image] = {}
+        for item in frame_data:
+            frame = item["frame"]
+            grid_pos = frame.get("grid_pos") or [int(frame.get("frame_index", 0)) // cols, int(frame.get("frame_index", 0)) % cols]
+            by_pos[(int(grid_pos[0]), int(grid_pos[1]))] = item["image"]
+        cell_w, cell_h = frame_data[0]["image"].size
+        images = []
+        for col in range(cols):
+            canvas = self._checker_background((cell_w * rows, cell_h))
+            for row in range(rows):
+                image = by_pos.get((row, col))
+                if image is not None:
+                    canvas.alpha_composite(image, (row * cell_w, 0))
+            images.append(canvas)
+        return self._write_walk_gif(
+            images=images,
+            task_path=task_path,
+            output_name=f"{prefix}_all_directions.gif",
+            scale=scale,
+            fps=fps,
+        )
+
+    def _write_walk_gif(
+        self,
+        images: list[Image.Image],
+        task_path: Path,
+        output_name: str,
+        scale: int,
+        fps: int,
+    ) -> str:
+        if not images:
+            return ""
+        duration = max(1, round(1000 / fps))
+        gif_frames = [self._gif_preview_frame(image, scale=scale) for image in images]
+        output_path = task_path / output_name
+        gif_frames[0].save(
+            output_path,
+            save_all=True,
+            append_images=gif_frames[1:],
+            duration=duration,
+            loop=0,
+            disposal=2,
+        )
+        return output_name
+
+    @staticmethod
+    def _gif_preview_frame(image: Image.Image, scale: int) -> Image.Image:
+        rgba = image.convert("RGBA")
+        frame = CoreGenerationService._checker_background(rgba.size)
+        frame.alpha_composite(rgba)
+        if scale != 1:
+            frame = frame.resize((frame.width * scale, frame.height * scale), Image.Resampling.NEAREST)
+        return frame.convert("P", palette=Image.Palette.ADAPTIVE)
+
+    @staticmethod
+    def _walk_frame_metrics(image: Image.Image) -> dict[str, Any]:
+        rgba = image.convert("RGBA")
+        alpha = rgba.getchannel("A")
+        bbox = alpha.point(lambda value: 255 if value > 8 else 0).getbbox()
+        visible_pixels = 0
+        total = 0
+        sx = 0
+        sy = 0
+        pixels = alpha.load()
+        for y in range(rgba.height):
+            for x in range(rgba.width):
+                value = pixels[x, y]
+                if value > 8:
+                    visible_pixels += 1
+                if value:
+                    total += value
+                    sx += x * value
+                    sy += y * value
+        bbox_center = None
+        bottom_y = None
+        if bbox:
+            bbox_center = ((bbox[0] + bbox[2] - 1) / 2.0, (bbox[1] + bbox[3] - 1) / 2.0)
+            bottom_y = bbox[3] - 1
+        alpha_centroid = (sx / total, sy / total) if total else None
+        return {
+            "bbox": None if bbox is None else list(bbox),
+            "bbox_center": None if bbox_center is None else [bbox_center[0], bbox_center[1]],
+            "alpha_centroid": None if alpha_centroid is None else [alpha_centroid[0], alpha_centroid[1]],
+            "bottom_y": bottom_y,
+            "visible_pixels": visible_pixels,
+        }
+
+    @staticmethod
+    def _walk_diff_score(first: Image.Image, second: Image.Image) -> float:
+        bg = Image.new("RGBA", first.size, (128, 128, 128, 255))
+        first_composite = bg.copy()
+        second_composite = bg.copy()
+        first_composite.alpha_composite(first.convert("RGBA"))
+        second_composite.alpha_composite(second.convert("RGBA"))
+        diff = ImageChops.difference(first_composite.convert("RGB"), second_composite.convert("RGB")).convert("L")
+        return sum(diff.getdata()) / (diff.width * diff.height * 255) * 100
+
+    @staticmethod
+    def _walk_row_labels(frame_layout: str | None, rows: int) -> list[str]:
+        if frame_layout in {"walk_4dir", "walk_3dir_4x4"}:
+            labels = ["down_front", "left", "right" if frame_layout == "walk_4dir" else "up_back", "up_back" if frame_layout == "walk_4dir" else "helper"]
+        elif frame_layout == "walk_3dir_3x4":
+            labels = ["down_front", "up_back", "left"]
+        else:
+            labels = [f"row_{index}" for index in range(rows)]
+        if len(labels) < rows:
+            labels.extend(f"row_{index}" for index in range(len(labels), rows))
+        return labels[:rows]
+
+    @staticmethod
+    def _default_walk_row_order(frame_layout: str | None) -> tuple[int, int, int, int]:
+        if frame_layout == "walk_3dir_4x4":
+            return (0, 1, -1, 2)
+        return (0, 1, -1, 3)
+
+    @staticmethod
+    def _safe_name(value: str) -> str:
+        return "".join(char if char.isalnum() or char in {"-", "_"} else "_" for char in value).strip("_") or "row"
+
+    @staticmethod
+    def _number_range(values: list[float | int]) -> float:
+        return float(max(values) - min(values)) if values else 0.0
+
+    @staticmethod
+    def _area_range_pct(values: list[int]) -> float:
+        return (max(values) - min(values)) / mean(values) * 100 if values else 0.0
+
     async def _process_generated_images(
         self,
         task_path: Path,
@@ -663,6 +1103,16 @@ class CoreGenerationService:
             "histogram_json": candidate.get("style_lock_histogram_json"),
             "reference_images": reference_images,
         }
+
+    @staticmethod
+    def _load_reference_images(paths: tuple[Path, ...]) -> list[tuple[Path, int, bytes]]:
+        images: list[tuple[Path, int, bytes]] = []
+        for path in paths:
+            if not path.exists():
+                raise FileNotFoundError(f"Reference image not found: {path}")
+            payload = path.read_bytes()
+            images.append((path, len(payload), payload))
+        return images
 
     def _new_manifest(
         self,

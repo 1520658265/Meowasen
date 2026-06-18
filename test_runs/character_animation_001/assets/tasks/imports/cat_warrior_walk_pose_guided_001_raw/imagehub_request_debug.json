@@ -1,0 +1,63 @@
+{
+  "created_at": "2026-06-18T09:23:12.679976+00:00",
+  "endpoint": "https://imagehub.taijiai.online/api/images/generate",
+  "task_id": "cat_warrior_walk_pose_guided_001_raw",
+  "dry_run": true,
+  "transport": {
+    "httpx_trust_env": false,
+    "proxy_env": {
+      "HTTP_PROXY": "http://127.0.0.1:9",
+      "HTTPS_PROXY": "http://127.0.0.1:9",
+      "ALL_PROXY": "http://127.0.0.1:9",
+      "NO_PROXY": "localhost,127.0.0.1,::1",
+      "http_proxy": "http://127.0.0.1:9",
+      "https_proxy": "http://127.0.0.1:9",
+      "all_proxy": "http://127.0.0.1:9",
+      "no_proxy": "localhost,127.0.0.1,::1"
+    }
+  },
+  "requests": [
+    {
+      "baseUrl": "https://www.taijiai.online/",
+      "apiKey": "<redacted>",
+      "clientId": "7ece16f1-4ec4-4a0a-976a-257e8e2a1901",
+      "request": {
+        "batchId": "dd376225-97ae-4658-8323-d9a4fb9a33a5",
+        "index": 1,
+        "total": 1,
+        "protocol": "custom-openai",
+        "model": "gpt-image-2",
+        "prompt": "Project-wide style contract: RPG game art first, cute colorful pixel-art map readability, limited cohesive palette, clean silhouettes, low-noise symbolic detail, crisp hand-placed pixels. RPG pixel art style, game sprite, single character, centered composition on the configured chroma-key background, clear readable silhouette, strong pose, limited color palette, no scenery or background details, RPG overworld readability, top-down orthographic game view, native low-resolution RPG sprite design, readable at 128x128 and 64x64, chunky pixel clusters, large simple color blocks, crisp hard pixel edges, bold 1-2 pixel dark outline, simplified ornament shapes, avoid tiny high-frequency costume details, avoid soft painterly shading, 64x64 pixel game asset Generation background contract: use a flat solid chroma-key background with exact RGB(255,0,255), hex #FF00FF, filling every cell behind the subject. This is not final transparency; alpha transparency is created only by post-processing. Keep RGB(255,0,255) / #FF00FF out of the character, object, weapon, outfit, highlights, and effects. 16-cell square RPG walking source sheet arranged in a strict 4x4 grid. Only three directions are authored by the model; the right-facing row will be built later by mirroring the left-facing row in code. Row 1: facing down/front. Row 2: facing left. Row 3: facing up/back. Row 4: duplicate helper row, repeat the left-facing walk cycle with the same character and do not invent a new direction. Each column is one walk-cycle frame. Keep the same character, outfit, armor, weapon, shield, silhouette, proportions, palette, and pixel-art rendering across every frame. One complete full-body sprite per cell, centered with equal padding. The character should occupy about 70 percent of each cell height, leaving generous safe margin for weapon tips, ears, tail, and cape. No overlap, no merged bodies, no labels, no scenery beyond the configured chroma-key background. Create a clean RPG pixel-art walk animation sheet for the approved ornate cat warrior. Use reference image 1 as the character identity, costume, palette, silhouette, weapon, shield, cat ears, tail, and RPG pixel style reference. Use reference image 2 as the strict pose and layout guide: each cell's skeleton controls the body direction, foot placement, body bob, tail direction, and locked spear guide. Render the final art as the cat warrior, not as a skeleton. Preserve the exact 4x4 grid and the pose guide's row/column logic. Rows: row 1 down/front walk cycle, row 2 left-facing walk cycle, row 3 up/back walk cycle, row 4 helper duplicate of left-facing walk cycle for later code mirroring. Columns: left foot contact, passing body up, right foot contact, passing body down and loop-ready. Keep the spear and shield locked to the torso across frames. Make side-view foot motion clearly visible so the character does not slide. Use a flat solid RGB(255,0,255) #FF00FF background in every cell for post-processing. No labels, no text, no borders, no scene, no extra effects. column 1: left foot contact pose, opposite arm forward, clear walking silhouette column 2: passing pose, feet closer together, body one pixel higher, same torso and weapon anchor column 3: right foot contact pose, opposite arm forward, clear walking silhouette column 4: passing pose returning to the start, body one pixel lower, ready to loop to column 1 Create one image only. Target canvas: 1024x1024. Frame layout: walk_3dir_4x4, grid=4x4. Strictly follow the grid. Return only the image. avoid: non-RPG style, photorealistic material texture, raw texture scan, generic texture sample, 3d render, noisy gritty surface, cinematic scene painting, realistic, photorealistic, blurry, noisy, background clutter, multiple characters, text, watermark, 3d render, anime portrait, realistic proportions, high-resolution illustration, soft brushwork, airbrushed gradients, tiny jewelry details, dense micro details, transparent background, checkerboard transparency grid, fake transparency, gradient background, textured background, scenery, floor plane, cast shadow, contact shadow, white background, black background, using RGB(255,0,255) or #FF00FF on the subject, right-facing authored row, inconsistent character identity, different armor, different cape, different shield emblem, different weapon, weapon drifting away from the torso, shield changing size, mismatched scale, oversized sprite, cropped ears, cropped weapon, cropped tail, cropped feet, diagonal view, isometric view, side-scroller view, merged figures, overlapping sprites, missing cell separation, text labels, frame numbers",
+        "aspectRatio": "1:1",
+        "size": "1024x1024",
+        "resolution": "1K",
+        "quality": "auto",
+        "outputFormat": "jpeg",
+        "seed": "",
+        "negativePrompt": "",
+        "referenceImages": [
+          {
+            "mime_type": "image/png",
+            "base64_length": 137204
+          },
+          {
+            "mime_type": "image/png",
+            "base64_length": 31944
+          }
+        ]
+      }
+    }
+  ],
+  "reference_images": [
+    {
+      "path": "test_runs\\character_static_001\\assets\\tasks\\sprites\\cat_warrior_candidates_gpt_wifi_001\\selected_preview_384.png",
+      "mime_type": "image/png",
+      "bytes": 102903
+    },
+    {
+      "path": "test_runs\\character_animation_001\\pose_guides\\pose_walk_3dir_4x4.png",
+      "mime_type": "image/png",
+      "bytes": 23957
+    }
+  ]
+}
