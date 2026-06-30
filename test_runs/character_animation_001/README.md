@@ -174,3 +174,68 @@ QC summary:
 - Down/front and up/back rows have stronger motion, but QC flags `center_drift`.
 - The image model still ignored the requested smaller 70% occupancy; source
   import reported `subject_overflow` on all frames.
+
+## Real Run 003
+
+Status: pose-guided Gemini route via the bobdong relay generated, imported,
+mirrored, and QC'd successfully.
+
+Route:
+
+- Generation through the relay-backed Gemini call (the direct
+  `generativelanguage.googleapis.com` route was unreachable in Run 001).
+- Inputs: approved static cat warrior + `pose_walk_3dir_4x4.png` as the
+  pose/layout guide.
+- Frame layout: `walk_3dir_4x4`, sheet 1024x1024 JPG.
+
+Raw API output:
+
+- `assets/tasks/imports/cat_warrior_walk_gemini_relay_pose_guided_001_raw/gemini_image_sheet_0.jpg`
+
+Three-direction processed source:
+
+- `assets/tasks/sprites/cat_warrior_walk_gemini_relay_pose_guided_001`
+
+Final mirrored four-direction task:
+
+- `assets/tasks/sprites/cat_warrior_walk_gemini_relay_pose_guided_4dir_001`
+- `sheet_0.png`
+- `processed_0_0.png` through `processed_0_15.png`
+- `qc_auto_all_directions.gif`
+- `qc_auto_down_front.gif`
+- `qc_auto_left.gif`
+- `qc_auto_right.gif`
+- `qc_auto_up_back.gif`
+- `qc_auto_metrics.json`
+
+QC summary:
+
+- 16/16 final frames built successfully.
+- Exact chroma-key residual pixels: `0` for every source frame.
+- Edge visible pixels: `0` for every source frame.
+- Pipeline is deterministic: re-running `import-sheet` + `build-walk-4dir` +
+  `walk-qc` from the same raw JPG reproduces the committed PNG bytes and metric
+  values; only the embedded `created_at` timestamps change.
+- Per-row motion metrics (% pixels):
+  - down/front: motion_mean 5.655, motion_range 1.826, loop_diff 5.746,
+    flags `low_pose_motion`.
+  - left:       motion_mean 5.542, motion_range 4.140, loop_diff 6.421,
+    flags `low_pose_motion`, `scale_or_detail_drift`.
+  - right:      identical to left because it is mirrored in code.
+  - up/back:    motion_mean 5.925, motion_range 5.649, loop_diff 8.316,
+    flags `low_pose_motion`, `uneven_pose_motion`, `scale_or_detail_drift`.
+- Compared with Real Run 002 (`cat_warrior_walk_4dir_mirrored_001`), all four
+  rows still trip `low_pose_motion`, and the side rows additionally trip
+  `scale_or_detail_drift`. The pose guide reduced direction inconsistency but
+  did not yet produce the strong walk cycle target.
+- All 16 source frames still reported `subject_overflow` during import; the
+  model continues to fill the 70% safe area.
+
+Reanchor protocol:
+
+- The 32 PNG files modified between b8a446d and the next run were the result
+  of an out-of-pipeline edit (sheet 1024 -> 512 plus bottom-row pixel changes)
+  that left `meta.json` describing a 1024x1024 sheet with 256 cell size while
+  the actual sheet was 512x512. The fix is to re-run `import-sheet` against the
+  unchanged raw JPG; the deterministic pipeline overwrites the strays back to
+  the b8a446d byte state.

@@ -301,7 +301,14 @@ def _build_body(
             "outputFormat": args.output_format,
             "seed": args.seed,
             "negativePrompt": args.negative_prompt,
-            "referenceImages": [item["data_url"] for item in reference_images],
+            "referenceImages": [
+                {
+                    "name": item["path"].name,
+                    "type": item["mime_type"],
+                    "dataUrl": item["data_url"],
+                }
+                for item in reference_images
+            ],
         },
     }
 
@@ -435,6 +442,15 @@ def _redact_body(body: dict[str, Any]) -> dict[str, Any]:
 
 
 def _summarize_reference_data_url(value: Any) -> dict[str, Any] | Any:
+    if isinstance(value, dict):
+        summary = dict(value)
+        data_url = summary.pop("dataUrl", "")
+        summarized = _summarize_reference_data_url(data_url)
+        if isinstance(summarized, dict):
+            summary.update(summarized)
+        else:
+            summary["dataUrl_summary"] = summarized
+        return summary
     if not isinstance(value, str):
         return value
     match = re.match(r"^data:([^;,]+);base64,(.*)$", value, flags=re.DOTALL)

@@ -1,0 +1,26 @@
+Create a clean RPG pixel-art walk animation sheet for the approved ornate cat warrior.
+Use reference image 1 as the strict character identity, costume, palette, silhouette, weapon, shield, cat ears, tail, and RPG pixel style reference. The cat warrior in reference image 1 carries a long spear in the right hand and a round shield on the left arm; both the spear and the shield are part of the character identity and MUST appear in every one of the 16 cells, including the up/back facing row.
+Use reference image 2 as the strict pose and layout guide: each cell's skeleton controls the body direction, foot placement, body bob, tail direction, and the locked spear axis. The purple weapon guide in image 2 marks where the spear shaft and tip should sit in each cell.
+Render the final art as the cat warrior, not as a skeleton. Preserve the exact 4x4 grid and the pose guide's row/column logic.
+Rows: row 1 down/front walk cycle, row 2 left-facing walk cycle, row 3 up/back walk cycle, row 4 helper duplicate of left-facing walk cycle for later code mirroring.
+Columns: column 1 left foot contact, column 2 passing pose body up, column 3 right foot contact, column 4 passing pose body down and loop-ready.
+
+Weapon and shield visibility contract (strict, applies to every cell):
+- The spear is always held in the right hand. Its wooden shaft is a clear vertical line and its metal tip is a small bright cluster of pixels.
+- The round shield is always strapped to the left arm. Its rim is a contiguous outlined disk silhouette.
+- Row 1 down/front: spear shaft visible on the right side of the body, metal tip rising above the right shoulder; shield disk visible on the left side of the body at chest height.
+- Row 2 left-facing: spear shaft visible in front of the body silhouette, metal tip pointing diagonally up-forward; shield disk visible on the far side of the body but still readable as a thin disk edge at chest height.
+- Row 3 up/back: the camera sees the character from behind. The spear shaft must still be visible behind the right shoulder as a clear vertical line, with the metal tip rising above the head outline so it is not hidden by the cape or body. The shield must still be readable on the left side at hip height; render at least a crescent of the shield rim so the disk silhouette is not lost behind the body. Never let the cape, hair, or body fully occlude the spear or the shield.
+- Row 4 helper: same visibility rules as row 2.
+
+Motion contract (apply per row, not just per column):
+- Each row must read as a strong walk, not a slide. Between column 1 and column 3 the legs swap front/back foot; in columns 2 and 4 the body rises by one pixel and the feet are close together.
+- For row 1 and row 3 (down/front and up/back), shift the planted foot horizontally by at least 4 pixels across the cycle and bob the head up by exactly 1 pixel in the passing frames.
+- For row 2 and row 4 (left-facing), keep the body center stable in X but swing the rear leg back and the front leg forward so the foot contact is visibly different between column 1 and column 3.
+
+Identity stability contract:
+- Same character, outfit, armor, cape, fur color, shield emblem, and spear length in every cell. No alternate weapons. No missing accessories.
+- Keep the spear and shield locked to the torso anchor across all frames; do not let them drift away or change scale.
+- Make side-view foot motion clearly visible so the character does not slide.
+
+Use a flat solid RGB(255,0,255) #FF00FF background in every cell for post-processing. No labels, no text, no borders, no scene, no extra effects.

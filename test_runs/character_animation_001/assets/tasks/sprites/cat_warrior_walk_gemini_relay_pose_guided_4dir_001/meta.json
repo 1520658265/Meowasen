@@ -1,6 +1,6 @@
 {
   "task_id": "cat_warrior_walk_gemini_relay_pose_guided_4dir_001",
-  "created_at": "2026-06-18T10:13:17.691227+00:00",
+  "created_at": "2026-06-22T06:15:38.624662+00:00",
   "asset_type": "character",
   "frame_layout": "walk_4dir",
   "frame_grid": [
@@ -748,7 +748,7 @@
           ]
         }
       ],
-      "created_at": "2026-06-18T10:13:29.322466+00:00"
+      "created_at": "2026-06-22T06:15:55.380168+00:00"
     }
   ]
 }

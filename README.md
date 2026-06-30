@@ -6,6 +6,21 @@ Phase 1 implements the local core generation pipeline:
 prompt -> provider -> raw sheet -> split frames -> postprocess -> PNG + meta.json
 ```
 
+Current animation validation is using a second route:
+
+```text
+reference image -> image-to-video -> auto frame selection -> pixel postprocess -> sprite sheet -> HTML preview
+```
+
+The best current walk-cycle result is under
+`assets/tasks/sprites/gothic_umbrella_walk_4dir_pixel_v5_auto12/`. Runtime
+outputs under `assets/tasks/` are local artifacts and are ignored by Git.
+
+For the planned ComfyUI reference-image replacement, see
+`docs/plans/pixel-asset-generator/ComfyUI参考图生成接入方案.md`. For cleanup
+status and legacy candidates, see
+`docs/plans/pixel-asset-generator/项目整理审计-2026-06-30.md`.
+
 Project-wide art rule: every final asset is for an RPG game. Prompts,
 post-processing, terrain packs, scene tilesets, sprites, and props must default
 to RPG pixel-art readability: limited cohesive palettes, clear silhouettes,

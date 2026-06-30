@@ -1,3 +1,15 @@
 .env
 __pycache__/
 *.py[cod]
+
+# Runtime and experiment outputs.
+tmp/
+assets/tasks/
+test_runs/**/assets/tasks/
+
+# Local helper scripts or machine-specific transfer scripts.
+upload_to_autodl.bat
+autodl_download_models.sh
+
+# Local media/debug exports.
+ceshi*.png
